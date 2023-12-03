@@ -4,7 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/services.dart';
 import 'package:evcompanion2/presentation/widgets/mytextfield.dart';
 import 'package:evcompanion2/presentation/widgets/customButtom.dart';
-import 'package:evcompanion2/presentation/view/bottom_nav_controller.dart';
+import 'package:evcompanion2/presentation/view/bottom_nav_pages/bottom_nav_controller.dart';
+
 class EditProfile extends StatefulWidget {
   @override
   State<EditProfile> createState() => _EditProfileState();
@@ -12,13 +13,14 @@ class EditProfile extends StatefulWidget {
 
 class _EditProfileState extends State<EditProfile> {
   late SharedPreferences Preferences;
-   TextEditingController name_ctrl=TextEditingController();
-   TextEditingController uname_ctrl=TextEditingController();
-   TextEditingController phone_ctrl=TextEditingController();
+  TextEditingController name_ctrl = TextEditingController();
+  TextEditingController uname_ctrl = TextEditingController();
+  TextEditingController phone_ctrl = TextEditingController();
   void initState() {
     fetchData();
     super.initState();
   }
+
   void fetchData() async {
     Preferences = await SharedPreferences.getInstance()!;
     String? tname = Preferences.getString('namekey')!;
@@ -27,63 +29,60 @@ class _EditProfileState extends State<EditProfile> {
     setState(() {
       name_ctrl = TextEditingController(text: tname);
       uname_ctrl = TextEditingController(text: tuname);
-       phone_ctrl = TextEditingController(text: tphone);
-
+      phone_ctrl = TextEditingController(text: tphone);
     });
-
-
   }
-
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         //backgroundColor: Colors.transparent,
         elevation: 0,
-
       ),
       body: SingleChildScrollView(
-        child:Container(
+        child: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: Column(
             children: [
               // Image.asset('assets/icon1.png',  height: 100, width: 100, ),
-              Text( "My Profile",style: TextStyle(fontWeight:FontWeight.bold,fontSize: 40), ),
-              Icon(Icons.person,size: 70,color: Colors.grey,),
-
-              Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child:
-                  myTextField("Full name","Full name",TextInputType.text,name_ctrl)
+              Text(
+                "My Profile",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
               ),
-              Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: myTextField("Email address","Email address",TextInputType.text,uname_ctrl)
+              Icon(
+                Icons.person,
+                size: 70,
+                color: Colors.grey,
               ),
 
               Padding(
                   padding: const EdgeInsets.all(12.0),
-                  child: myTextField("Phone number","Phone number",TextInputType.number,phone_ctrl)
-              ),
+                  child: myTextField(
+                      "Full name", "Full name", TextInputType.text, name_ctrl)),
+              Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: myTextField("Email address", "Email address",
+                      TextInputType.text, uname_ctrl)),
 
+              Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: myTextField("Phone number", "Phone number",
+                      TextInputType.number, phone_ctrl)),
 
-              customButton("update",()=>storedata()),
+              customButton("update", () => storedata()),
 
               // style: const ButtonStyle(
               // backgroundColor: MaterialStatePropertyAll<Color>(Colors.brown),
               // ),
-
-
-
             ],
           ),
         ),
       ),
     );
   }
+
   void storedata() async {
     String? personname = name_ctrl.text;
     String? username = uname_ctrl.text;
@@ -93,14 +92,18 @@ class _EditProfileState extends State<EditProfile> {
     Preferences.setString('namekey', personname);
     Preferences.setString('unamekey', username);
     Preferences.setString('phonekey', phone);
-    Navigator.of(context).push(MaterialPageRoute
-      (builder: (context)=>BottomNavController()));
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => BottomNavController()));
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Center(child: Text("updated",)),backgroundColor: Colors.green,elevation: 20,
+      content: Center(
+          child: Text(
+        "updated",
+      )),
+      backgroundColor: Colors.green,
+      elevation: 20,
       behavior: SnackBarBehavior.floating,
-      margin: EdgeInsets.all(30),));
-
-
+      margin: EdgeInsets.all(30),
+    ));
   }
 }
 

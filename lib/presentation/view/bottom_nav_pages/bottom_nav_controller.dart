@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import '../../utils/colorConstants.dart';
-import 'bottom_nav_pages/profile.dart';
-import 'bottom_nav_pages/viewBooking.dart';
-import 'bottom_nav_pages/home.dart';
-import 'bottom_nav_pages/roadMap.dart';
+import '../../../utils/colorConstants.dart';
+import 'profile.dart';
+import 'viewBooking.dart';
+import '../homepage/home.dart';
+import 'roadMap.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 class BottomNavController extends StatefulWidget {
   @override
   _BottomNavControllerState createState() => _BottomNavControllerState();
 }
 
 class _BottomNavControllerState extends State<BottomNavController> {
-
   final _pages = [
-    Home(),
+    Homepage(),
     RoadMap(),
     ViewBooking(),
     Profile(),
@@ -24,9 +24,9 @@ class _BottomNavControllerState extends State<BottomNavController> {
   Widget build(BuildContext context) {
     return Scaffold(
       //appBar: AppBar(
-       // title: Text( "Appname", style: appNameStyle),
-       // centerTitle: true,
-       // ),
+      // title: Text( "Appname", style: appNameStyle),
+      // centerTitle: true,
+      // ),
       bottomNavigationBar: BottomNavigationBar(
         elevation: 5,
         selectedItemColor: myappColor,
@@ -34,14 +34,13 @@ class _BottomNavControllerState extends State<BottomNavController> {
         unselectedItemColor: Colors.grey,
         currentIndex: _currentIndex,
         selectedLabelStyle:
-        TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+            TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: "Home",
           ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.map), label: "Road Map"),
+          BottomNavigationBarItem(icon: Icon(Icons.map), label: "Road Map"),
           BottomNavigationBarItem(
             icon: Icon(Icons.remove_red_eye),
             label: "View Booking",
@@ -62,4 +61,3 @@ class _BottomNavControllerState extends State<BottomNavController> {
     );
   }
 }
-
