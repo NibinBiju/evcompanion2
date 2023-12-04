@@ -33,6 +33,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_screenutil: ^5.9.0
+  http: ^1.1.2
   intl: ^0.17.0
   lottie: ^2.7.0
   shared_preferences: ^2.2.0
@@ -57,7 +58,6 @@ flutter:
   assets:
     - assets/
     - assets/lottie_animations/
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see

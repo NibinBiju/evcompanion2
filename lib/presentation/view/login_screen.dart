@@ -101,14 +101,17 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void validateandLogin() async {
-    Preferences = await SharedPreferences.getInstance()!;
+    Preferences = await SharedPreferences.getInstance();
     String storedusername = Preferences.getString('unamekey')!;
     String storedpassword = Preferences.getString('passkey')!;
     // values that we entered at text field
     String username = uname_ctrl.text;
     String password = passwd_ctrl.text;
 
-    if (storedusername == username && storedpassword == password) {
+    if (storedusername == username &&
+        storedpassword == password &&
+        storedusername.isNotEmpty &&
+        storedpassword.isNotEmpty) {
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => BottomNavController()));
     } else {

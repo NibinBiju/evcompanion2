@@ -6,20 +6,22 @@ import 'package:evcompanion2/presentation/view/profile/my_profile.dart';
 import 'package:evcompanion2/presentation/view/profile/my_booking.dart';
 import 'package:evcompanion2/presentation/view/profile/my_favourite.dart';
 import 'package:evcompanion2/presentation/view/profile/terms_conditions.dart';
-import 'package:evcompanion2/presentation/view/profile/my_vehicle.dart';
+import 'package:evcompanion2/presentation/view/my_vehicle_page/my_vehicle.dart';
 import 'package:evcompanion2/presentation/view/login_screen.dart';
+
 class Profile extends StatefulWidget {
+  const Profile({super.key});
+
   @override
   State<Profile> createState() => _ProfileState();
 }
 
 class _ProfileState extends State<Profile> {
-
   final pages = [
     myProfile(),
     MyVehicle(),
-    MyFavourites(),
-    MyBooking(),
+    const MyFavourites(),
+    const MyBooking(),
     Terms_Conditions(),
     LoginScreen(),
   ];
@@ -40,26 +42,27 @@ class _ProfileState extends State<Profile> {
     Icons.logout,
   ];
   late SharedPreferences Preferences;
- String? name;
+  String? name;
   @override
   void initState() {
     fetchdata();
     super.initState();
   }
+
   // to read data from shared preference
-  void fetchdata() async{
+  void fetchdata() async {
     Preferences = await SharedPreferences.getInstance();
     setState(() {
       name = Preferences.getString('namekey')!;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         //backgroundColor: Colors.transparent,
         elevation: 0,
-
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -67,14 +70,20 @@ class _ProfileState extends State<Profile> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.person,size: 70,color: Colors.grey,),
-          Text( " $name",),
+            const Icon(
+              Icons.person,
+              size: 70,
+              color: Colors.grey,
+            ),
+            Text(
+              " $name",
+            ),
             SizedBox(height: 40.h),
             Expanded(
                 child: SingleChildScrollView(
-                child: ListView.builder(
+              child: ListView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: iconName.length,
                   itemBuilder: (context, index) {
                     return CardWidget1(
@@ -90,4 +99,3 @@ class _ProfileState extends State<Profile> {
     );
   }
 }
-
