@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:evcompanion2/model/add_vehicle.dart';
 import 'package:evcompanion2/presentation/view/my_vehicle_page/add_vehicle_page.dart';
 import 'package:evcompanion2/utils/colorConstants.dart';
 import 'package:flutter/material.dart';
@@ -11,20 +13,21 @@ class MyVehicle extends StatefulWidget {
 }
 
 class _MyVehicleState extends State<MyVehicle> {
-  // String name = 'Tesla';
-  // String type = 'type3';
-  // String image = "assets/tesla.jpg";
-  // String ccs = 'ccs2';
-  // void navigate() {
-  //   Navigator.of(context)
-  //       .push(MaterialPageRoute(builder: (context) => AddVehicle()));
-  // }
+  var jsondata;
+  AddVehicleModel? addVehicleModel;
+  bool isLoading = false;
 
   Future<void> fetchData() async {
-    var uri = Uri.parse('http://127.0.0.1:8000/api/addVehicle/');
+    isLoading = true;
+    setState(() {});
+    var uri = Uri.parse('http://10.0.2.2:8000/api/addVehicle/');
     var response = await http.get(uri);
     print(response.statusCode);
     print(response.body);
+    jsondata = jsonDecode(response.body);
+    addVehicleModel = AddVehicleModel.fromJson(jsondata);
+    isLoading = false;
+    setState(() {});
   }
 
   @override
@@ -59,7 +62,7 @@ class _MyVehicleState extends State<MyVehicle> {
       floatingActionButton: InkWell(
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (cnt) {
-            return const AddVehiclePage();
+            return AddVehiclePage();
           }));
         },
         child: Padding(
@@ -96,113 +99,134 @@ class _MyVehicleState extends State<MyVehicle> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: List.generate(
-            1,
-            (index) => Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Card(
-                shadowColor: Colors.black,
-                elevation: 5,
-                child: Container(
-                  padding: const EdgeInsets.all(8),
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Colors.black87,
-                        blurRadius: 2,
-                      )
-                    ],
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(
-                      color: myappColor,
-                      width: 3,
-                    ),
+      body: isLoading
+          ? const Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(
+                    color: myappColor,
                   ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          width: 130,
-                          height: 130,
-                          decoration: BoxDecoration(
-                              image: const DecorationImage(
-                                  image: AssetImage('assets/tesla.jpg')),
-                              borderRadius: BorderRadius.circular(19),
-                              border: Border.all(
-                                color: myappColor,
-                                width: 3,
-                              )),
+                ],
+              ),
+            )
+          : SingleChildScrollView(
+              child: Column(
+                children: List.generate(
+                  addVehicleModel?.data?.length ?? 0,
+                  (index) => Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Card(
+                      shadowColor: Colors.black,
+                      elevation: 5,
+                      child: Container(
+                        padding: const EdgeInsets.all(8),
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.black87,
+                              blurRadius: 2,
+                            )
+                          ],
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: myappColor,
+                            width: 3,
+                          ),
                         ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(10),
-                        child: const Column(
+                        child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'Model',
-                              style: TextStyle(
-                                fontSize: 25,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            Text(
-                              'Company name',
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            Text(
-                              'UID',
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  'Battery capacity',
-                                  style: TextStyle(
-                                    fontSize: 17,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w400,
+                            Padding(
+                              padding: const EdgeInsets.only(top: 4),
+                              child: Container(
+                                width: 130,
+                                height: 130,
+                                decoration: BoxDecoration(
+                                  image: const DecorationImage(
+                                    image: AssetImage('assets/tesla.jpg'),
+                                  ),
+                                  borderRadius: BorderRadius.circular(19),
+                                  border: Border.all(
+                                    color: myappColor,
+                                    width: 3,
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                Text(
-                                  '100',
-                                  style: TextStyle(
-                                    fontSize: 17,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    addVehicleModel?.data?[index].model ?? '',
+                                    style: const TextStyle(
+                                      fontSize: 25,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w700,
+                                    ),
                                   ),
-                                )
-                              ],
+                                  Text(
+                                    addVehicleModel?.data?[index].make ?? '',
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 170,
+                                    child: Text(
+                                      addVehicleModel?.data?[index].uid ?? '',
+                                      style: const TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
+                                    ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      const Text(
+                                        'Battery capacity:- ',
+                                        style: TextStyle(
+                                          fontSize: 17,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        child: Text(
+                                          addVehicleModel?.data?[index]
+                                                  .batteryCapacity ??
+                                              '',
+                                          style: const TextStyle(
+                                            fontSize: 17,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 1,
+                                        ),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
                             )
                           ],
                         ),
-                      )
-                    ],
+                      ),
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ),
-      ),
     );
   }
 }

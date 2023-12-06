@@ -1,8 +1,8 @@
-import 'package:evcompanion2/presentation/view/login_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class RoadMap extends StatefulWidget {
+  const RoadMap({super.key});
+
   @override
   State<RoadMap> createState() => _RoadMapState();
 }
@@ -13,7 +13,7 @@ class _RoadMapState extends State<RoadMap> {
     return Scaffold(
       body: Stack(children: <Widget>[
         Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
                 image: AssetImage('assets/mapview.jpg'), fit: BoxFit.cover),
           ),

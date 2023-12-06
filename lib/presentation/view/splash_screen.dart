@@ -4,7 +4,6 @@ import 'dart:async';
 import 'package:evcompanion2/presentation/view/bottom_nav_pages/bottom_nav_controller.dart';
 import 'package:evcompanion2/presentation/view/feature_page/feature_page.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../utils/colorConstants.dart';
@@ -31,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
     String storedpassword = sharedpreference.getString('passkey')!;
     if (storedpassword.isNotEmpty && storedusername.isNotEmpty) {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (cnt) {
-        return BottomNavController();
+        return const BottomNavController();
       }));
     } else {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (cnt) {

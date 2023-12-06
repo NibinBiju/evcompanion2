@@ -2,7 +2,12 @@ import 'package:evcompanion2/utils/colorConstants.dart';
 import 'package:flutter/material.dart';
 
 class AddVehiclePage extends StatelessWidget {
-  const AddVehiclePage({super.key});
+  AddVehiclePage({super.key});
+  final TextEditingController _modelNameController = TextEditingController();
+  final TextEditingController _brandNameController = TextEditingController();
+  final TextEditingController _uidNumberController = TextEditingController();
+  final TextEditingController _betteryCapacityController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -57,146 +62,202 @@ class AddVehiclePage extends StatelessWidget {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Vehicle Details',
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                color: Colors.black,
-                fontSize: 22,
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-
-            //add vehicle name
-            const Text(
-              'Vehicle Name',
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                color: Colors.grey,
-                fontSize: 18,
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 216, 216, 216),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: const Center(
-                child: TextField(
-                  cursorHeight: 35,
-                  style: TextStyle(
-                    fontSize: 20,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Row(
+                children: [
+                  Text(
+                    'Vehicle Details',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black,
+                      fontSize: 22,
+                    ),
                   ),
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: 'Add model name',
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              //add vehicle image
+              const Row(
+                children: [
+                  Text(
+                    'Vehicle Image',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: Colors.grey,
+                      fontSize: 18,
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                width: double.infinity,
+                height: 150,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 216, 216, 216),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: const Center(
+                  child: Icon(
+                    Icons.add,
+                    size: 50,
+                    color: Colors.grey,
                   ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-
-            //add vehicle company name
-            const Text(
-              'Company Name',
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                color: Colors.grey,
-                fontSize: 18,
+              const SizedBox(
+                height: 20,
               ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 216, 216, 216),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: const Center(
-                child: TextField(
-                  cursorHeight: 35,
-                  style: TextStyle(
-                    fontSize: 20,
+              //add vehicle name
+              const Row(
+                children: [
+                  Text(
+                    'Vehicle Name',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: Colors.grey,
+                      fontSize: 18,
+                    ),
                   ),
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: 'Add brand name',
+                ],
+              ),
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 216, 216, 216),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: const Center(
+                  child: TextField(
+                    // controller: ,
+                    cursorHeight: 35,
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Add model name',
+                    ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            //add vehicle uid number
-            const Text(
-              'Add UID Number',
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                color: Colors.grey,
-                fontSize: 18,
+              const SizedBox(
+                height: 30,
               ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 216, 216, 216),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: const Center(
-                child: TextField(
-                  cursorHeight: 35,
-                  style: TextStyle(
-                    fontSize: 20,
+              //add vehicle company name
+              const Row(
+                children: [
+                  Text(
+                    'Company Name',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: Colors.grey,
+                      fontSize: 18,
+                    ),
                   ),
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: 'Add model name',
+                ],
+              ),
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 216, 216, 216),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: const Center(
+                  child: TextField(
+                    cursorHeight: 35,
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Add brand name',
+                    ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            //add battery capacity
-            const Text(
-              'Add Battery capacity',
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                color: Colors.grey,
-                fontSize: 18,
+              const SizedBox(
+                height: 30,
               ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 216, 216, 216),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: const Center(
-                child: TextField(
-                  cursorHeight: 35,
-                  style: TextStyle(
-                    fontSize: 20,
+              //add vehicle uid number
+              const Row(
+                children: [
+                  Text(
+                    'Add UID Number',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: Colors.grey,
+                      fontSize: 18,
+                    ),
                   ),
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: 'Add Battery capacity',
+                ],
+              ),
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 216, 216, 216),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: const Center(
+                  child: TextField(
+                    cursorHeight: 35,
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Add UID Number',
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+              const SizedBox(
+                height: 30,
+              ),
+              //add battery capacity
+              const Row(
+                children: [
+                  Text(
+                    'Add Battery capacity',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: Colors.grey,
+                      fontSize: 18,
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 216, 216, 216),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: const Center(
+                  child: TextField(
+                    cursorHeight: 35,
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Add Battery capacity',
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: double.infinity,
+                height: 150,
+              )
+            ],
+          ),
         ),
       ),
     );

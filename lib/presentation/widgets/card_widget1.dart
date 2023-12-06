@@ -6,6 +6,7 @@ class CardWidget1 extends StatelessWidget {
   final Widget pageName;
 
   const CardWidget1({
+    super.key,
     required this.icons,
     required this.iconName,
     required this.pageName,
@@ -19,6 +20,7 @@ class CardWidget1 extends StatelessWidget {
         color: Colors.grey[200],
         child: InkWell(
             child: ListTile(
+              contentPadding: const EdgeInsets.all(15),
               horizontalTitleGap: 30,
               leading: Icon(
                 icons,

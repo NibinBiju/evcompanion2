@@ -1,7 +1,7 @@
+import 'package:evcompanion2/utils/colorConstants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:evcompanion2/presentation/widgets/cardWidget1.dart';
+import 'package:evcompanion2/presentation/widgets/card_widget1.dart';
 import 'package:evcompanion2/presentation/view/profile/my_profile.dart';
 import 'package:evcompanion2/presentation/view/profile/my_booking.dart';
 import 'package:evcompanion2/presentation/view/profile/my_favourite.dart';
@@ -19,7 +19,7 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   final pages = [
     myProfile(),
-    MyVehicle(),
+    const MyVehicle(),
     const MyFavourites(),
     const MyBooking(),
     Terms_Conditions(),
@@ -41,7 +41,7 @@ class _ProfileState extends State<Profile> {
     Icons.security_outlined,
     Icons.logout,
   ];
-  late SharedPreferences Preferences;
+  late SharedPreferences preferences;
   String? name;
   @override
   void initState() {
@@ -51,48 +51,94 @@ class _ProfileState extends State<Profile> {
 
   // to read data from shared preference
   void fetchdata() async {
-    Preferences = await SharedPreferences.getInstance();
+    preferences = await SharedPreferences.getInstance();
     setState(() {
-      name = Preferences.getString('namekey')!;
+      name = preferences.getString('namekey')!;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        //backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
+      body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(
-              Icons.person,
-              size: 70,
-              color: Colors.grey,
+            Stack(
+              children: [
+                Container(
+                  height: 160,
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                    color: myappColor,
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.elliptical(200, 60),
+                        bottomRight: Radius.elliptical(200, 60)),
+                  ),
+                ),
+                Positioned(
+                  left: 150,
+                  top: 60,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                          color: myappColor,
+                          width: 2,
+                        ),
+                        color: myappbarColor,
+                        shape: BoxShape.circle),
+                    width: 90,
+                    height: 90,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.person,
+                          size: 40,
+                          color: Colors.grey,
+                        ),
+                        Text(
+                          " $name",
+                          style: const TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-            Text(
-              " $name",
+            Container(
+              decoration: const BoxDecoration(
+                color: myappbarColor,
+              ),
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // const SizedBox(
+                  //   height: 10,
+                  // ),
+                  // SizedBox(height: 20.h),
+                  Expanded(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: iconName.length,
+                      itemBuilder: (context, index) {
+                        return CardWidget1(
+                          iconName: iconName[index],
+                          icons: icons[index],
+                          pageName: pages[index],
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
-            SizedBox(height: 40.h),
-            Expanded(
-                child: SingleChildScrollView(
-              child: ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: iconName.length,
-                  itemBuilder: (context, index) {
-                    return CardWidget1(
-                      iconName: iconName[index],
-                      icons: icons[index],
-                      pageName: pages[index],
-                    );
-                  }),
-            )),
           ],
         ),
       ),
