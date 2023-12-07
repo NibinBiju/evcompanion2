@@ -1,8 +1,16 @@
+import 'package:evcompanion2/controller/add_vehicle_controller/add_vehicle_provider.dart';
 import 'package:evcompanion2/utils/colorConstants.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class AddVehiclePage extends StatelessWidget {
-  AddVehiclePage({super.key});
+class AddVehiclePage extends StatefulWidget {
+  const AddVehiclePage({super.key});
+
+  @override
+  State<AddVehiclePage> createState() => _AddVehiclePageState();
+}
+
+class _AddVehiclePageState extends State<AddVehiclePage> {
   final TextEditingController _modelNameController = TextEditingController();
   final TextEditingController _brandNameController = TextEditingController();
   final TextEditingController _uidNumberController = TextEditingController();
@@ -11,10 +19,20 @@ class AddVehiclePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var addVehicleProvider = Provider.of<AddVehicleProvider>(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       floatingActionButton: InkWell(
-        onTap: () {},
+        onTap: () {
+          addVehicleProvider.addVehiclePostData(
+              uid: _uidNumberController.text,
+              make: _brandNameController.text,
+              model: _modelNameController.text,
+              year: '2023',
+              batteryCapacity: _betteryCapacityController.text,
+              chargingTime: '45',
+              vehicleImage: 'vehicleImage');
+        },
         child: Padding(
           padding: const EdgeInsets.only(
             left: 30,
@@ -133,14 +151,14 @@ class AddVehiclePage extends StatelessWidget {
                   color: const Color.fromARGB(255, 216, 216, 216),
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: const Center(
+                child: Center(
                   child: TextField(
-                    // controller: ,
+                    controller: _modelNameController,
                     cursorHeight: 35,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 20,
                     ),
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Add model name',
                     ),
@@ -169,13 +187,14 @@ class AddVehiclePage extends StatelessWidget {
                   color: const Color.fromARGB(255, 216, 216, 216),
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: const Center(
+                child: Center(
                   child: TextField(
+                    controller: _brandNameController,
                     cursorHeight: 35,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 20,
                     ),
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Add brand name',
                     ),
@@ -204,13 +223,14 @@ class AddVehiclePage extends StatelessWidget {
                   color: const Color.fromARGB(255, 216, 216, 216),
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: const Center(
+                child: Center(
                   child: TextField(
+                    controller: _uidNumberController,
                     cursorHeight: 35,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 20,
                     ),
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Add UID Number',
                     ),
@@ -239,13 +259,14 @@ class AddVehiclePage extends StatelessWidget {
                   color: const Color.fromARGB(255, 216, 216, 216),
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: const Center(
+                child: Center(
                   child: TextField(
+                    controller: _betteryCapacityController,
                     cursorHeight: 35,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 20,
                     ),
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Add Battery capacity',
                     ),

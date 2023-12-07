@@ -1,3 +1,4 @@
+import 'package:evcompanion2/presentation/view/homepage/home.dart';
 import 'package:evcompanion2/utils/colorConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -136,6 +137,7 @@ class _ProfileState extends State<Profile> {
                       },
                     ),
                   ),
+                  
                 ],
               ),
             ),
