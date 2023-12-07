@@ -1,9 +1,11 @@
 // ignore_for_file: unnecessary_new
 
+import 'package:evcompanion2/controller/add_vehicle_controller/add_vehicle_provider.dart';
 import 'package:evcompanion2/utils/colorConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:evcompanion2/presentation/view/splash_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(
@@ -20,20 +22,22 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       builder: (_, child) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'ev_companion',
-
-          theme: new ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: myappColor),
-              appBarTheme: const AppBarTheme(
-                  backgroundColor: Colors.white,
-                  foregroundColor:
-                      Colors.black //here you can give the text color
-                  )),
-          //
-
-          home: SplashScreen(),
+        return MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (context) => AddVehicleProvider()),
+          ],
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'ev_companion',
+            theme: new ThemeData(
+                colorScheme: ColorScheme.fromSeed(seedColor: myappColor),
+                appBarTheme: const AppBarTheme(
+                    backgroundColor: Colors.white,
+                    foregroundColor:
+                        Colors.black //here you can give the text color
+                    )),
+            home: const SplashScreen(),
+          ),
         );
       },
     );

@@ -1,9 +1,8 @@
-import 'dart:convert';
-import 'package:evcompanion2/model/add_vehicle.dart';
+import 'package:evcompanion2/controller/add_vehicle_controller/add_vehicle_provider.dart';
 import 'package:evcompanion2/presentation/view/my_vehicle_page/add_vehicle_page.dart';
 import 'package:evcompanion2/utils/colorConstants.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class MyVehicle extends StatefulWidget {
   const MyVehicle({super.key});
@@ -13,31 +12,15 @@ class MyVehicle extends StatefulWidget {
 }
 
 class _MyVehicleState extends State<MyVehicle> {
-  var jsondata;
-  AddVehicleModel? addVehicleModel;
-  bool isLoading = false;
-
-  Future<void> fetchData() async {
-    isLoading = true;
-    setState(() {});
-    var uri = Uri.parse('http://10.0.2.2:8000/api/addVehicle/');
-    var response = await http.get(uri);
-    print(response.statusCode);
-    print(response.body);
-    jsondata = jsonDecode(response.body);
-    addVehicleModel = AddVehicleModel.fromJson(jsondata);
-    isLoading = false;
-    setState(() {});
-  }
-
   @override
   void initState() {
-    fetchData();
+    Provider.of<AddVehicleProvider>(context, listen: false).addVehicleGetData();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    var addvehicleProvider = Provider.of<AddVehicleProvider>(context);
     return Scaffold(
       appBar: AppBar(
         elevation: 20,
@@ -99,7 +82,7 @@ class _MyVehicleState extends State<MyVehicle> {
           ),
         ),
       ),
-      body: isLoading
+      body: addvehicleProvider.isLoading
           ? const Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -113,7 +96,7 @@ class _MyVehicleState extends State<MyVehicle> {
           : SingleChildScrollView(
               child: Column(
                 children: List.generate(
-                  addVehicleModel?.data?.length ?? 0,
+                  addvehicleProvider.addVehicleModel?.data?.length ?? 0,
                   (index) => Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Card(
@@ -162,7 +145,9 @@ class _MyVehicleState extends State<MyVehicle> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    addVehicleModel?.data?[index].model ?? '',
+                                    addvehicleProvider.addVehicleModel
+                                            ?.data?[index].model ??
+                                        '',
                                     style: const TextStyle(
                                       fontSize: 25,
                                       color: Colors.black,
@@ -170,7 +155,9 @@ class _MyVehicleState extends State<MyVehicle> {
                                     ),
                                   ),
                                   Text(
-                                    addVehicleModel?.data?[index].make ?? '',
+                                    addvehicleProvider.addVehicleModel
+                                            ?.data?[index].make ??
+                                        '',
                                     style: const TextStyle(
                                       fontSize: 20,
                                       color: Colors.black,
@@ -180,7 +167,9 @@ class _MyVehicleState extends State<MyVehicle> {
                                   SizedBox(
                                     width: 170,
                                     child: Text(
-                                      addVehicleModel?.data?[index].uid ?? '',
+                                      addvehicleProvider.addVehicleModel
+                                              ?.data?[index].uid ??
+                                          '',
                                       style: const TextStyle(
                                         fontSize: 20,
                                         color: Colors.black,
@@ -202,7 +191,9 @@ class _MyVehicleState extends State<MyVehicle> {
                                       ),
                                       SizedBox(
                                         child: Text(
-                                          addVehicleModel?.data?[index]
+                                          addvehicleProvider
+                                                  .addVehicleModel
+                                                  ?.data?[index]
                                                   .batteryCapacity ??
                                               '',
                                           style: const TextStyle(
