@@ -26,8 +26,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void _checkData() async {
     SharedPreferences sharedpreference = await SharedPreferences.getInstance();
-    String storedusername = sharedpreference.getString('unamekey')!;
-    String storedpassword = sharedpreference.getString('passkey')!;
+    String storedusername = sharedpreference.getString('unamekey') ?? '';
+    String storedpassword = sharedpreference.getString('passkey') ?? '';
     if (storedpassword.isNotEmpty && storedusername.isNotEmpty) {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (cnt) {
         return const BottomNavController();
