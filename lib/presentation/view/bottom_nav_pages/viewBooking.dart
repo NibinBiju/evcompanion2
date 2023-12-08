@@ -16,7 +16,7 @@ class _ViewBookingState extends State<ViewBooking> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+        backgroundColor: Colors.green,
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
