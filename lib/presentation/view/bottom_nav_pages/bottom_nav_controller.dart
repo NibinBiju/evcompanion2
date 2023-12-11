@@ -5,7 +5,7 @@ import '../../../utils/colorConstants.dart';
 import 'profile.dart';
 import 'viewBooking.dart';
 import '../homepage/home.dart';
-import 'roadMap.dart';
+import '../../payment/roadMap.dart';
 
 class BottomNavController extends StatefulWidget {
   const BottomNavController({super.key});
