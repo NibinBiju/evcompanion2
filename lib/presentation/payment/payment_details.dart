@@ -60,7 +60,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                 ),
                 SizedBox(height: 20,),
                 ElevatedButton(onPressed: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>RoadMap()));
+                  Navigator.pop(context);
                 }, child: Text("submit"))
           ],
         ),
