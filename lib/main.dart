@@ -3,7 +3,7 @@
 import 'package:evcompanion2/controller/add_vehicle_controller/add_vehicle_provider.dart';
 import 'package:evcompanion2/utils/colorConstants.dart';
 import 'package:flutter/material.dart';
-import 'package:evcompanion2/presentation/view/splash_screen.dart';
+import 'package:evcompanion2/splash_screen/splash_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 

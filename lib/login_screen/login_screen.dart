@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:evcompanion2/presentation/view/registration_screen.dart';
+import 'package:evcompanion2/registration_page/registration_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'bottom_nav_pages/bottom_nav_controller.dart';
+import '../presentation/view/bottom_nav_pages/bottom_nav_controller.dart';
 import 'package:evcompanion2/presentation/widgets/mytextfield.dart';
 import 'package:evcompanion2/presentation/widgets/customButtom.dart';
 
