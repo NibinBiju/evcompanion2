@@ -6,7 +6,7 @@ import 'package:evcompanion2/presentation/view/feature_page/feature_page.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../utils/colorConstants.dart';
+import '../utils/colorConstants.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

@@ -3,12 +3,12 @@ import 'package:evcompanion2/utils/colorConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:evcompanion2/presentation/widgets/card_widget1.dart';
-import 'package:evcompanion2/presentation/view/profile/my_profile.dart';
-import 'package:evcompanion2/presentation/view/profile/my_booking.dart';
-import 'package:evcompanion2/presentation/view/profile/my_favourite.dart';
-import 'package:evcompanion2/presentation/view/profile/terms_conditions.dart';
+import 'package:evcompanion2/presentation/view/settings_page/my_profile.dart';
+import 'package:evcompanion2/presentation/view/settings_page/my_booking.dart';
+import 'package:evcompanion2/presentation/view/settings_page/my_favourite.dart';
+import 'package:evcompanion2/presentation/view/settings_page/terms_conditions.dart';
 import 'package:evcompanion2/presentation/view/my_vehicle_page/my_vehicle.dart';
-import 'package:evcompanion2/presentation/view/login_screen.dart';
+import 'package:evcompanion2/login_screen/login_screen.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
