@@ -1,8 +1,9 @@
-import 'package:evcompanion2/controller/add_vehicle_controller/add_vehicle_provider.dart';
+import 'dart:convert';
+import 'package:evcompanion2/model/add_vehicle.dart';
 import 'package:evcompanion2/presentation/view/my_vehicle_page/add_vehicle_page.dart';
 import 'package:evcompanion2/utils/colorConstants.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
 class MyVehicle extends StatefulWidget {
   const MyVehicle({super.key});
@@ -12,15 +13,42 @@ class MyVehicle extends StatefulWidget {
 }
 
 class _MyVehicleState extends State<MyVehicle> {
+  var jsondata;
+  AddVehicleModel? addVehicleModel;
+  bool isLoading = false;
+
   @override
   void initState() {
-    Provider.of<AddVehicleProvider>(context, listen: false).addVehicleGetData();
+    addVehicleGetData();
+    print('hi');
     super.initState();
+  }
+
+  Future<void> addVehicleGetData() async {
+    setState(() {
+      isLoading = true;
+    });
+    try {
+      var uri = Uri.parse('http://127.0.0.1:8000/api/addVehicle/');
+      var response = await http.get(uri);
+      print(response.statusCode);
+      print(response.body);
+      jsondata = jsonDecode(response.body);
+      addVehicleModel = AddVehicleModel.fromJson(jsondata);
+
+      setState(() {
+        isLoading = false;
+      });
+    } catch (e) {
+      print('hi');
+      print(e);
+      print('hi');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    var addvehicleProvider = Provider.of<AddVehicleProvider>(context);
+    // var addvehicleProvider = Provider.of<AddVehicleProvider>(context);
     return Scaffold(
       appBar: AppBar(
         elevation: 20,
@@ -82,7 +110,7 @@ class _MyVehicleState extends State<MyVehicle> {
           ),
         ),
       ),
-      body: addvehicleProvider.isLoading
+      body: isLoading
           ? const Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -96,7 +124,7 @@ class _MyVehicleState extends State<MyVehicle> {
           : SingleChildScrollView(
               child: Column(
                 children: List.generate(
-                  addvehicleProvider.addVehicleModel?.data?.length ?? 0,
+                  addVehicleModel?.data?.length ?? 0,
                   (index) => Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Card(
@@ -145,9 +173,7 @@ class _MyVehicleState extends State<MyVehicle> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    addvehicleProvider.addVehicleModel
-                                            ?.data?[index].model ??
-                                        '',
+                                    addVehicleModel?.data?[index].model ?? '',
                                     style: const TextStyle(
                                       fontSize: 25,
                                       color: Colors.black,
@@ -155,9 +181,7 @@ class _MyVehicleState extends State<MyVehicle> {
                                     ),
                                   ),
                                   Text(
-                                    addvehicleProvider.addVehicleModel
-                                            ?.data?[index].make ??
-                                        '',
+                                    addVehicleModel?.data?[index].make ?? '',
                                     style: const TextStyle(
                                       fontSize: 20,
                                       color: Colors.black,
@@ -167,9 +191,7 @@ class _MyVehicleState extends State<MyVehicle> {
                                   SizedBox(
                                     width: 170,
                                     child: Text(
-                                      addvehicleProvider.addVehicleModel
-                                              ?.data?[index].uid ??
-                                          '',
+                                      addVehicleModel?.data?[index].uid ?? '',
                                       style: const TextStyle(
                                         fontSize: 20,
                                         color: Colors.black,
@@ -191,9 +213,7 @@ class _MyVehicleState extends State<MyVehicle> {
                                       ),
                                       SizedBox(
                                         child: Text(
-                                          addvehicleProvider
-                                                  .addVehicleModel
-                                                  ?.data?[index]
+                                          addVehicleModel?.data?[index]
                                                   .batteryCapacity ??
                                               '',
                                           style: const TextStyle(

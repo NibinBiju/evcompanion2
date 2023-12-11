@@ -2,10 +2,10 @@
 
 import 'package:flutter/material.dart';
 import '../../../utils/colorConstants.dart';
-import 'profile.dart';
-import 'viewBooking.dart';
+import '../settings_page/profile.dart';
+import '../../../view_booking/view_booking.dart';
 import '../homepage/home.dart';
-import 'roadMap.dart';
+import '../../../payment_page/payment_page.dart';
 
 class BottomNavController extends StatefulWidget {
   const BottomNavController({super.key});
@@ -18,7 +18,7 @@ class _BottomNavControllerState extends State<BottomNavController> {
   final _pages = [
     const Homepage(),
     const RoadMap(),
-    ViewBooking(),
+    ViewBookingPage(),
     const Profile(),
   ];
   var _currentIndex = 0;
