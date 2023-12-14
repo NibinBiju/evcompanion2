@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:evcompanion2/model/add_vehicle.dart';
+import 'package:evcompanion2/model/add_vehicle_model/add_vehicle.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 

@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:evcompanion2/model/add_vehicle.dart';
+import 'package:evcompanion2/model/add_vehicle_model/add_vehicle.dart';
 import 'package:evcompanion2/presentation/view/my_vehicle_page/add_vehicle_page.dart';
 import 'package:evcompanion2/utils/colorConstants.dart';
 import 'package:flutter/material.dart';

@@ -1,17 +1,21 @@
 import 'package:evcompanion2/presentation/payment/payment_details.dart';
 import 'package:evcompanion2/utils/colorConstants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-class RoadMap extends StatefulWidget {
-  const RoadMap({super.key});
+class RoadMapP extends StatefulWidget {
+  const RoadMapP({super.key});
 
   @override
-  State<RoadMap> createState() => _RoadMapState();
+  State<RoadMapP> createState() => _RoadMapPState();
 }
 
-class _RoadMapState extends State<RoadMap> {
+class _RoadMapPState extends State<RoadMapP> {
+
+
   @override
   Widget build(BuildContext context) {
+  TextEditingController textEditingController = TextEditingController();
     return Scaffold(
      appBar: AppBar(
       leading: Padding(
@@ -38,7 +42,15 @@ class _RoadMapState extends State<RoadMap> {
                   color: Colors.blue,
                   child: Row(
                     children: [
-                      Image.asset("assets/gpay.jpg")
+                      // Image.asset("assets/gpay.jpg")
+
+                      TextField(
+                        controller: textEditingController,
+                        decoration: InputDecoration(labelText: "hey"),
+                       inputFormatters: [
+                        LengthLimitingTextInputFormatter(12)
+                       ], 
+                      )
                     ],
                   ),
               ),
