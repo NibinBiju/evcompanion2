@@ -1,5 +1,6 @@
 import 'package:evcompanion2/model/my_booking_model/my_booking_model.dart';
 import 'package:evcompanion2/utils/colorConstants.dart';
+import 'package:evcompanion2/view_booking/history_page.dart';
 import 'package:flutter/material.dart';
 
 class ViewBookingPage extends StatefulWidget {
@@ -10,7 +11,7 @@ class ViewBookingPage extends StatefulWidget {
 }
 
 class _ViewBookingPageState extends State<ViewBookingPage> {
-  List<MyBookingModel> bookingList = [
+ List<MyBookingModel> bookingList = [
     MyBookingModel(
       date: '20-12-2023',
       image: 'assets/charging.jpeg',
@@ -71,7 +72,7 @@ class BookingCardTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+ return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
         decoration: BoxDecoration(
