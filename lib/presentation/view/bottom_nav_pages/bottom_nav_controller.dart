@@ -5,7 +5,7 @@ import '../../../utils/colorConstants.dart';
 import '../settings_page/profile.dart';
 import '../../../view_booking/view_booking.dart';
 import '../homepage/home.dart';
-import '../../../payment_page/payment_page.dart';
+import '../payment_page/payment_page.dart';
 
 class BottomNavController extends StatefulWidget {
   const BottomNavController({super.key});
@@ -17,8 +17,8 @@ class BottomNavController extends StatefulWidget {
 class _BottomNavControllerState extends State<BottomNavController> {
   final _pages = [
     const Homepage(),
-    const RoadMap(),
-    ViewBookingPage(),
+    const PaymentPage(),
+    const ViewBookingPage(),
     const Profile(),
   ];
   var _currentIndex = 0;
@@ -39,7 +39,7 @@ class _BottomNavControllerState extends State<BottomNavController> {
             icon: Icon(Icons.home),
             label: "Home",
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.map), label: "Road Map"),
+          BottomNavigationBarItem(icon: Icon(Icons.payment), label: "Payment"),
           BottomNavigationBarItem(
             icon: Icon(Icons.remove_red_eye),
             label: "View Booking",

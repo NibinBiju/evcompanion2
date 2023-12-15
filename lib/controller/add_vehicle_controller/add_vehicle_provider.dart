@@ -13,7 +13,7 @@ class AddVehicleProvider with ChangeNotifier {
     isLoading = true;
     notifyListeners();
 
-    var uri = Uri.parse('http://127.0.0.1:8000/api/addVehicle/');
+    var uri = Uri.parse('http://10.0.2.2:8000/api/addVehicle/');
     var response = await http.get(uri);
     print(response.statusCode);
     print(response.body);
@@ -34,7 +34,6 @@ class AddVehicleProvider with ChangeNotifier {
       required String vehicleImage}) async {
     var uri = Uri.parse('http://10.0.2.2:8000/api/addVehicle/');
     var response = await http.post(uri, body: {
-      'uid': uid,
       'make': make,
       'model': model,
       'year': year,
