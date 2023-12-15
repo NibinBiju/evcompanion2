@@ -8,7 +8,7 @@ import 'package:evcompanion2/presentation/view/settings_page/my_booking.dart';
 import 'package:evcompanion2/presentation/view/settings_page/my_favourite.dart';
 import 'package:evcompanion2/presentation/view/settings_page/terms_conditions.dart';
 import 'package:evcompanion2/presentation/view/my_vehicle_page/my_vehicle.dart';
-import 'package:evcompanion2/login_screen/login_screen.dart';
+import 'package:evcompanion2/presentation/view/login_screen/login_screen.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});

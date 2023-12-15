@@ -201,42 +201,7 @@ class _AddVehiclePageState extends State<AddVehiclePage> {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 30,
-              ),
-              //add vehicle uid number
-              const Row(
-                children: [
-                  Text(
-                    'Add UID Number',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      color: Colors.grey,
-                      fontSize: 18,
-                    ),
-                  ),
-                ],
-              ),
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 216, 216, 216),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Center(
-                  child: TextField(
-                    controller: _uidNumberController,
-                    cursorHeight: 35,
-                    style: const TextStyle(
-                      fontSize: 20,
-                    ),
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Add UID Number',
-                    ),
-                  ),
-                ),
-              ),
+
               const SizedBox(
                 height: 30,
               ),

@@ -1,7 +1,7 @@
 import 'package:evcompanion2/presentation/view/feature_page/widgets/page1.dart';
 import 'package:evcompanion2/presentation/view/feature_page/widgets/page2.dart';
 import 'package:evcompanion2/presentation/view/feature_page/widgets/page3.dart';
-import 'package:evcompanion2/login_screen/login_screen.dart';
+import 'package:evcompanion2/presentation/view/login_screen/login_screen.dart';
 import 'package:evcompanion2/utils/colorConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
