@@ -31,15 +31,12 @@ class _DetailsPageState extends State<DetailsPage> {
               width: 20,
             ),
             InkWell(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const DetailsPage();
-                }));
-              },
+              onTap: () {},
               child: Container(
                 width: 170,
                 height: 60,
                 decoration: BoxDecoration(
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(13),
                   border: Border.all(
                     color: Colors.green,
