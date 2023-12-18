@@ -1,16 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
-// import 'dart:ui' as ui;
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:evcompanion2/presentation/view/details_page/details_aoeg.dart';
-import 'package:evcompanion2/presentation/view/homepage/widgets/homepage_ev_card.dart';
+import 'package:evcompanion2/presentation/view/homepage/widgets/ev_list_view.dart';
+import 'package:evcompanion2/presentation/view/homepage/widgets/ev_map_view.dart';
 import 'package:evcompanion2/utils/colorConstants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:flutter_google_places/flutter_google_places.dart' as loc;
-// import 'package:google_api_headers/google_api_headers.dart' as header;
 import 'package:google_maps_webservice/places.dart' as places;
 import 'package:http/http.dart' as http;
 
@@ -30,6 +26,13 @@ class _HomepageState extends State<Homepage> {
   final Completer<GoogleMapController> _mapController = Completer();
 
   BitmapDescriptor customMarkerIcon = BitmapDescriptor.defaultMarker;
+
+  bool viewCategoryCheck = true;
+  List viewCategoryPages = [
+    MapView(),
+    EvListView(),
+  ];
+  int pageViewCategoryIndex = 0;
 
   void addCustomMarker() async {
     BitmapDescriptor.fromAssetImage(
@@ -105,103 +108,7 @@ class _HomepageState extends State<Homepage> {
                         markerId: const MarkerId('_destination'),
                         icon: BitmapDescriptor.defaultMarker,
                         position: _destination,
-                        onTap: () {
-                          showModalBottomSheet(
-                              context: context,
-                              builder: (context) {
-                                return Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      height: 200,
-                                      decoration: const BoxDecoration(
-                                          image: DecorationImage(
-                                              image: AssetImage(
-                                                  'assets/charging.jpeg'),
-                                              fit: BoxFit.cover)),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          const Row(
-                                            children: [
-                                              Text(
-                                                'Vypin Charging stations',
-                                                style: TextStyle(
-                                                  fontSize: 23,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: myappColor,
-                                                ),
-                                                overflow: TextOverflow.ellipsis,
-                                                maxLines: 2,
-                                              ),
-                                            ],
-                                          ),
-                                          const Row(
-                                            children: [
-                                              Text(
-                                                '4.3',
-                                                style: TextStyle(
-                                                  fontSize: 20,
-                                                  color: Colors.orangeAccent,
-                                                  fontWeight: FontWeight.w700,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 2,
-                                              ),
-                                              Icon(
-                                                Icons.star,
-                                                color: Colors.orangeAccent,
-                                              )
-                                            ],
-                                          ),
-                                          const Text(
-                                              '''Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley'''),
-                                          const SizedBox(
-                                            height: 70,
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              Navigator.push(context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) {
-                                                return const DetailsPage();
-                                              }));
-                                            },
-                                            child: Container(
-                                              width: double.infinity,
-                                              height: 40,
-                                              decoration: BoxDecoration(
-                                                color: const Color.fromARGB(
-                                                    123, 54, 179, 58),
-                                                borderRadius:
-                                                    BorderRadius.circular(18),
-                                                border: Border.all(
-                                                  width: 4,
-                                                  color: myappColor,
-                                                ),
-                                              ),
-                                              child: const Center(
-                                                child: Text(
-                                                  'Views Details',
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                );
-                              });
-                        }),
+                        onTap: () {}),
                     const Marker(
                       markerId: MarkerId('_desitinationLocation'),
                       icon: BitmapDescriptor.defaultMarker,
@@ -209,87 +116,183 @@ class _HomepageState extends State<Homepage> {
                     ),
                   },
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(13),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        width: 290,
-                        height: 70,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                        ),
-                        child: Center(
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                              left: 20,
-                            ),
-                            child: TextField(
-                              controller: searchController,
-                              onChanged: (value) {
-                                if (value.isNotEmpty) {
-                                  searchPlaces();
-                                }
+
+                //view category
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        height: 40,
+                        child: Row(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  viewCategoryCheck = !viewCategoryCheck;
+                                  pageViewCategoryIndex = 0;
+                                });
                               },
-                              style: const TextStyle(
-                                fontSize: 25,
-                                color: myappColor,
-                                fontWeight: FontWeight.w200,
-                              ),
-                              decoration: const InputDecoration(
-                                hintText: 'search',
-                                border: InputBorder.none,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          if (_currentP != null && _mapController.isCompleted) {
-                            _mapController.future.then((controller) {
-                              controller.animateCamera(
-                                CameraUpdate.newCameraPosition(
-                                  CameraPosition(
-                                    target: _currentP!,
-                                    zoom: 14,
+                              child: Container(
+                                width: 70,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      color: Colors.black,
+                                      blurStyle: BlurStyle.outer,
+                                      blurRadius: 2,
+                                    )
+                                  ],
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(13),
+                                    bottomLeft: Radius.circular(13),
+                                  ),
+                                  color: viewCategoryCheck
+                                      ? Colors.green
+                                      : Colors.white,
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'Mapview',
+                                    style: TextStyle(
+                                      color: viewCategoryCheck
+                                          ? Colors.white
+                                          : Colors.green,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                 ),
-                              );
-                            });
-                          }
-                        },
-                        child: const CircleAvatar(
-                          radius: 33,
-                          backgroundColor: Colors.green,
-                          child: Center(
-                            child: Icon(
-                              Icons.gps_fixed_outlined,
-                              color: Colors.white,
+                              ),
                             ),
-                          ),
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  viewCategoryCheck = !viewCategoryCheck;
+                                  pageViewCategoryIndex = 1;
+                                });
+                              },
+                              child: Container(
+                                width: 70,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        color: Colors.black,
+                                        blurStyle: BlurStyle.outer,
+                                        blurRadius: 2,
+                                      )
+                                    ],
+                                    color: viewCategoryCheck
+                                        ? Colors.white
+                                        : Colors.green,
+                                    borderRadius: const BorderRadius.only(
+                                      bottomRight: Radius.circular(13),
+                                      topRight: Radius.circular(13),
+                                    )),
+                                child: Center(
+                                  child: Text(
+                                    'Listview',
+                                    style: TextStyle(
+                                      color: viewCategoryCheck
+                                          ? Colors.green
+                                          : Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    CarouselSlider.builder(
-                      itemCount: 1,
-                      itemBuilder: (context, index, number) {
-                        return HomepageCard();
-                      },
-                      options: CarouselOptions(aspectRatio: 60 / 40),
                     ),
-                    const SizedBox(
-                      height: 40,
-                    ),
+                    //search bar
+                    viewCategoryCheck
+                        ? Padding(
+                            padding: const EdgeInsets.all(13),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  width: 290,
+                                  height: 70,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: Colors.white,
+                                      boxShadow: const [
+                                        BoxShadow(
+                                          blurRadius: 2,
+                                          color: Colors.black,
+                                        ),
+                                        BoxShadow(
+                                          color: Colors.black,
+                                        ),
+                                        BoxShadow(
+                                          color: Colors.black,
+                                        ),
+                                      ]),
+                                  child: Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                        left: 20,
+                                      ),
+                                      child: TextField(
+                                        controller: searchController,
+                                        onChanged: (value) {
+                                          if (value.isNotEmpty) {
+                                            searchPlaces();
+                                          }
+                                        },
+                                        style: const TextStyle(
+                                          fontSize: 25,
+                                          color: myappColor,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                        decoration: const InputDecoration(
+                                          hintText: 'search',
+                                          border: InputBorder.none,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    if (_currentP != null &&
+                                        _mapController.isCompleted) {
+                                      _mapController.future.then((controller) {
+                                        controller.animateCamera(
+                                          CameraUpdate.newCameraPosition(
+                                            CameraPosition(
+                                              target: _currentP!,
+                                              zoom: 14,
+                                            ),
+                                          ),
+                                        );
+                                      });
+                                    }
+                                  },
+                                  child: const CircleAvatar(
+                                    radius: 33,
+                                    backgroundColor: Colors.green,
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.gps_fixed_outlined,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        : Container(),
                   ],
-                )
+                ),
+                //list of pages in home
+
+                viewCategoryPages[pageViewCategoryIndex],
               ],
             ),
     );
