@@ -6,7 +6,7 @@ import '../../../utils/colorConstants.dart';
 import '../settings_page/profile.dart';
 import '../../../view_booking/view_booking.dart';
 import '../homepage/home.dart';
-import '../payment_page/payment_page.dart';
+import '../settings_page/qr_code.dart';
 
 class BottomNavController extends StatefulWidget {
   const BottomNavController({super.key});
@@ -18,7 +18,7 @@ class BottomNavController extends StatefulWidget {
 class _BottomNavControllerState extends State<BottomNavController> {
   final _pages = [
     const Homepage(),
-    const PaymentPage(),
+    const Battery(),
     const ViewBookingPage(),
     const Profile(),
   ];
