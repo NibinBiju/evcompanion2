@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:evcompanion2/presentation/view/booking_page/booking_page.dart';
 import 'package:flutter/material.dart';
 
 class DetailsPage extends StatefulWidget {
@@ -56,19 +57,29 @@ class _DetailsPageState extends State<DetailsPage> {
             ),
             const SizedBox(),
             //book station button
-            Container(
-              width: 170,
-              height: 60,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(13),
-                color: Colors.green,
-              ),
-              child: const Center(
-                child: Text(
-                  'Book charge',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const BookingPage(),
+                  ),
+                );
+              },
+              child: Container(
+                width: 170,
+                height: 60,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(13),
+                  color: Colors.green,
+                ),
+                child: const Center(
+                  child: Text(
+                    'Book charge',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
               ),

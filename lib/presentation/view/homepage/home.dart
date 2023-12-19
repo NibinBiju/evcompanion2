@@ -92,30 +92,32 @@ class _HomepageState extends State<Homepage> {
             )
           : Stack(
               children: [
-                GoogleMap(
-                  onMapCreated: (GoogleMapController mapcontroller) {
-                    _mapController.complete(mapcontroller);
-                  },
-                  zoomControlsEnabled: false,
-                  initialCameraPosition:
-                      CameraPosition(target: _currentP!, zoom: 14),
-                  markers: {
-                    Marker(
-                        markerId: const MarkerId('_currentPositon'),
-                        icon: BitmapDescriptor.defaultMarker,
-                        position: _currentP!),
-                    Marker(
-                        markerId: const MarkerId('_destination'),
-                        icon: BitmapDescriptor.defaultMarker,
-                        position: _destination,
-                        onTap: () {}),
-                    const Marker(
-                      markerId: MarkerId('_desitinationLocation'),
-                      icon: BitmapDescriptor.defaultMarker,
-                      position: _pApplepark,
-                    ),
-                  },
-                ),
+                viewCategoryCheck
+                    ? GoogleMap(
+                        onMapCreated: (GoogleMapController mapcontroller) {
+                          _mapController.complete(mapcontroller);
+                        },
+                        zoomControlsEnabled: false,
+                        initialCameraPosition:
+                            CameraPosition(target: _currentP!, zoom: 14),
+                        markers: {
+                          Marker(
+                              markerId: const MarkerId('_currentPositon'),
+                              icon: BitmapDescriptor.defaultMarker,
+                              position: _currentP!),
+                          Marker(
+                              markerId: const MarkerId('_destination'),
+                              icon: BitmapDescriptor.defaultMarker,
+                              position: _destination,
+                              onTap: () {}),
+                          const Marker(
+                            markerId: MarkerId('_desitinationLocation'),
+                            icon: BitmapDescriptor.defaultMarker,
+                            position: _pApplepark,
+                          ),
+                        },
+                      )
+                    : Container(),
 
                 //view category
                 Column(
