@@ -34,6 +34,8 @@ class _myProfileState extends State<myProfile> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        shadowColor: Colors.black,
+        
         title: Text(
           "My Profile",
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
@@ -55,153 +57,90 @@ class _myProfileState extends State<myProfile> {
             width: MediaQuery.of(context).size.width,
             child: Column(
               children: [
+                SizedBox(height: 30,),
                 CircleAvatar(
                   backgroundColor: Colors.grey,
                   radius: 50.0,
                   child: Icon(Icons.person,
-                  size: 70,),
+                  size: 70,
+                  color: Colors.white,),
                 ),
                 SizedBox(height: 20,),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Container(
-                    padding: EdgeInsets.all(10.0), // Add padding here
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200], // Set background color
-                      borderRadius: BorderRadius.circular(8.0), // Set border radius
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Container(
+                        width:MediaQuery.of(context).size.width/1.2,
+                        padding: EdgeInsets.all(10.0), // Add padding here
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200], // Set background color
+                          borderRadius: BorderRadius.circular(8.0), // Set border radius
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Name"),
+                            Text("$tname",style: TextStyle(fontSize: 20)),
+                          ],
+                        ),
+                      ),
                     ),
-                    child: Text("$tname"),
-                  ),
+                  ],
                 ),
-                 Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Container(
-                    padding: EdgeInsets.all(10.0), // Add padding here
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200], // Set background color
-                      borderRadius: BorderRadius.circular(8.0), // Set border radius
+                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                   children: [
+                     Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Container(
+                        width:MediaQuery.of(context).size.width/1.2,
+                        padding: EdgeInsets.all(10.0), // Add padding here
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200], // Set background color
+                          borderRadius: BorderRadius.circular(8.0), // Set border radius
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Email"),
+                            Text("$tuname",style: TextStyle(fontSize: 20)),
+
+                          ],
+                        ),
+                      ),
+                                     ),
+                   ],
+                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Container(
+                        width:MediaQuery.of(context).size.width/1.2,
+                        padding: EdgeInsets.all(10.0), // Add padding here
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200], // Set background color
+                          borderRadius: BorderRadius.circular(8.0), // Set border radius
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Phone number"),
+                            Text("$tphone",style: TextStyle(fontSize: 20),)
+                          ],
+                        ),
+                      ),
                     ),
-                    child: Text("$tuname"),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Container(
-                    padding: EdgeInsets.all(10.0), // Add padding here
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200], // Set background color
-                      borderRadius: BorderRadius.circular(8.0), // Set border radius
-                    ),
-                    child: Text("$tphone"),
-                  ),
+                  ],
                 )
               ],
             ),
           ),
         ),
       ),
-      // body: Stack(
-      //   children: [
-
-      //     Column(mainAxisAlignment: MainAxisAlignment.start,
-      //       children: [
-      //         Container(
-      //           height: 150,
-      //           width: double.infinity,
-      //           decoration: BoxDecoration(
-                 
-      //             image: DecorationImage(image: AssetImage("assets/green.jpg"),fit: BoxFit.cover)
-      //           ),
-                
-      //         ),
-      //       SizedBox(height: 20,),
-      //         Padding(
-      //           padding: const EdgeInsets.all(8.0),
-      //           child: Container(
-      //             width: double.infinity,
-      //             padding: EdgeInsets.all(13),
-      //             decoration: BoxDecoration(
-      //                color: myappColor,
-      //               borderRadius: BorderRadius.circular(20)
-      //             ),
-                 
-      //             child: Column(
-      //               children: [
-      //                 Column(
-      //                   crossAxisAlignment: CrossAxisAlignment.center,
-      //                   children: [
-      //                     Padding(
-      //                       padding: const EdgeInsets.all(8.0),
-      //                       child: Container(
-      //                         padding: EdgeInsets.all(8),
-      //                         decoration: BoxDecoration(
-      //                           borderRadius: BorderRadius.circular(20),
-      //                           color: Colors.white,
-      //                         ),
-      //                         child: Text('$tname',style: TextStyle(
-      //                           fontSize: 20,fontStyle: FontStyle.normal,fontWeight: FontWeight.bold
-      //                         ),),
-      //                       ),
-      //                     ),
-      //                     Padding(
-      //                       padding: const EdgeInsets.all(8.0),
-      //                       child: Container(
-      //                         padding: EdgeInsets.all(8),
-      //                         decoration: BoxDecoration(
-      //                           borderRadius: BorderRadius.circular(20),
-      //                           color: Colors.white,
-      //                         ),
-      //                         child: Text('$tuname',style: TextStyle(
-      //                           fontSize: 20,fontStyle: FontStyle.normal,fontWeight: FontWeight.bold
-      //                         ),),
-      //                       ),
-      //                     ),
-      //                     Padding(
-      //                       padding: const EdgeInsets.all(8.0),
-      //                       child: Container(
-      //                         padding: EdgeInsets.all(8),
-      //                         decoration: BoxDecoration(
-      //                           borderRadius: BorderRadius.circular(20),
-      //                           color: Colors.white,
-      //                         ),
-      //                         child: Text('$tphone',style: TextStyle(
-      //                           fontSize: 20,fontStyle: FontStyle.normal,fontWeight: FontWeight.bold
-      //                         ),),
-      //                       ),
-      //                     )
-      //                   ],
-      //                 ),
-      //               ],
-      //             ),
-      //           ),
-      //         )
-      //       ],
-      //     ),
-      //     Positioned(
-      //             top: 50,
-      //             left: 150,
-      //             child: CircleAvatar(
-      //             backgroundColor: Colors.black,
-      //             radius: 55,
-      //             backgroundImage: AssetImage('assets/pro.jpg'),                                ),
-      //           ),
-      //           Positioned(
-      //             top: 120,
-      //             left: 230,
-      //             child: CircleAvatar(
-      //               child: IconButton(onPressed: (){
-      //                  Navigator.of(context).push(
-      //                  MaterialPageRoute(builder: (context) => EditProfile()));
-      //               }, icon: Icon(Icons.edit,size: 21,color: Colors.black)),
-      //             )),
-      //              IconButton(
-      //               onPressed: (){
-      //                 Navigator.of(context).pop();
-      //               },
-      //               icon: Icon(Icons.arrow_back_ios_outlined),
-      //             ),
-      //   ],
-      // ),
     );
   }
 }

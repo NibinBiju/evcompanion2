@@ -44,6 +44,7 @@ class _ProfileState extends State<Profile> {
   ];
   late SharedPreferences preferences;
   String? name;
+  String? email;
   @override
   void initState() {
     fetchdata();
@@ -55,61 +56,69 @@ class _ProfileState extends State<Profile> {
     preferences = await SharedPreferences.getInstance();
     setState(() {
       name = preferences.getString('namekey')!;
+      email=preferences.getString('unamekey')!;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Profile",
+        style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35),),
+        centerTitle: true,
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Stack(
-              children: [
-                Container(
-                  height: 160,
-                  width: double.infinity,
-                  decoration: const BoxDecoration(
-                    color: myappColor,
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.elliptical(200, 60),
-                        bottomRight: Radius.elliptical(200, 60)),
-                  ),
-                ),
-                Positioned(
-                  left: 150,
-                  top: 60,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                          color: myappColor,
-                          width: 2,
-                        ),
-                        color: myappbarColor,
-                        shape: BoxShape.circle),
-                    width: 90,
-                    height: 90,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.person,
-                          size: 40,
-                          color: Colors.grey,
-                        ),
-                        Text(
-                          " $name",
-                          style: const TextStyle(
-                            fontSize: 18,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
+            
+            Positioned(
+              left: 150,
+              top: 10,
+              child: Container(
+                
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.white,
+                      width: 2,
                     ),
+                    color: myappbarColor,
+                    shape: BoxShape.circle),
+                padding: EdgeInsets.all(15),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [CircleAvatar(
+                     backgroundColor: Colors.grey,
+              radius: 40.0,
+              child: Icon(Icons.person,
+              size: 60,
+              color: Colors.white,),
                   ),
+                    // const Icon(
+                    //   Icons.person,
+                    //   size: 40,
+                    //   color: Colors.grey,
+                   // ),
+                    Text(
+                      " $name",
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    Text(
+                      " $email",
+                      style: const TextStyle(
+                        fontSize: 18,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
+            SizedBox(height: 10,),
             Container(
               decoration: const BoxDecoration(
                 color: myappbarColor,
@@ -129,10 +138,13 @@ class _ProfileState extends State<Profile> {
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: iconName.length,
                       itemBuilder: (context, index) {
-                        return CardWidget1(
-                          iconName: iconName[index],
-                          icons: icons[index],
-                          pageName: pages[index],
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CardWidget1(
+                            iconName: iconName[index],
+                            icons: icons[index],
+                            pageName: pages[index],
+                          ),
                         );
                       },
                     ),
