@@ -4,6 +4,7 @@
 
 import 'dart:convert';
 
+
 AddVehicleModel addVehicleFromJson(String str) =>
     AddVehicleModel.fromJson(json.decode(str));
 

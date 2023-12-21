@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
+import 'station_proceed.dart';
+
 class Greenspeed extends StatefulWidget {
   @override
   _GreenspeedState createState() => _GreenspeedState();
@@ -120,20 +122,25 @@ class _GreenspeedState extends State<Greenspeed> {
           SizedBox(height: 300),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
-              width: double.infinity,
-                height: 50,
-                decoration: BoxDecoration(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(10),
+            child: InkWell(
+               onTap: (){
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>StationProceed()));
+              },
+              child: Container(
+                width: double.infinity,
+                  height: 50,
+                  decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child:Center(
+                      child: Text("Proceed",
+                      style: TextStyle(
+                        fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white,
+                      ),
+                      ),
                     ),
-                    child:Center(
-                    child: Text("Proceed",
-                    style: TextStyle(
-                      fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white,
-                    ),
-                    ),
-                  ),
+              ),
             ),
           ),
         ],

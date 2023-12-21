@@ -215,6 +215,7 @@ class _HomepageState extends State<Homepage> {
                             padding: const EdgeInsets.all(13),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(
                                   width: 290,
@@ -275,16 +276,31 @@ class _HomepageState extends State<Homepage> {
                                       });
                                     }
                                   },
-                                  child: const CircleAvatar(
-                                    radius: 33,
-                                    backgroundColor: Colors.green,
-                                    child: Center(
-                                      child: Icon(
-                                        Icons.gps_fixed_outlined,
-                                        color: Colors.white,
+                                  child: Column(
+                                    children: [
+                                      const CircleAvatar(
+                                        radius: 33,
+                                        backgroundColor: Colors.green,
+                                        child: Center(
+                                          child: Icon(
+                                            Icons.gps_fixed_outlined,
+                                            color: Colors.white,
+                                          ),
+                                        ),
                                       ),
-                                    ),
+                                      SizedBox(height: 10,),
+                                      CircleAvatar(
+                                        radius: 30,
+                                        backgroundColor: Colors.green,
+                                        child: Center(
+                                          child: IconButton(onPressed: (){},
+                                           icon: Icon(Icons.format_align_center_outlined,
+                                           color: Colors.white,)),
+                                        ),
+                                      )
+                                    ],
                                   ),
+
                                 ),
                               ],
                             ),

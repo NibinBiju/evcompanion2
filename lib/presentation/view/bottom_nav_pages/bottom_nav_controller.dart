@@ -40,10 +40,10 @@ class _BottomNavControllerState extends State<BottomNavController> {
             icon: Icon(Icons.home),
             label: "Home",
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.payment), label: "Payment"),
+          BottomNavigationBarItem(icon: Icon(Icons.battery_charging_full), label: "Battery"),
           BottomNavigationBarItem(
-            icon: Icon(Icons.remove_red_eye),
-            label: "View Booking",
+            icon: Icon(Icons.earbuds_battery_outlined),
+            label: "Charger",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

@@ -51,6 +51,8 @@ dependencies:
   ai_barcode_scanner: ^3.4.1
   syncfusion_flutter_sliders: ^24.1.41
   syncfusion_flutter_datepicker: ^24.1.41
+  percent_indicator: ^4.2.3
+  image_picker: ^1.0.5
 
 
 dev_dependencies:
