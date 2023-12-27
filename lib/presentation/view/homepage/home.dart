@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:evcompanion2/presentation/view/homepage/filter.dart';
 import 'package:evcompanion2/presentation/view/homepage/widgets/ev_list_view.dart';
 import 'package:evcompanion2/presentation/view/homepage/widgets/ev_map_view.dart';
 import 'package:evcompanion2/utils/colorConstants.dart';
@@ -293,7 +294,10 @@ class _HomepageState extends State<Homepage> {
                                         radius: 30,
                                         backgroundColor: Colors.green,
                                         child: Center(
-                                          child: IconButton(onPressed: (){},
+                                          child: IconButton(onPressed: (){
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(builder:(context)=>Filter()));
+                                          },
                                            icon: Icon(Icons.format_align_center_outlined,
                                            color: Colors.white,)),
                                         ),

@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
                         Colors.black //here you can give the text color
                     )),
             // home: const SplashScreen(),
-            home: Filter(),
+            home: SplashScreen(),
           ),
         );
       },
