@@ -1,6 +1,7 @@
 // ignore_for_file: unnecessary_new
 
 import 'package:evcompanion2/controller/add_vehicle_controller/add_vehicle_provider.dart';
+import 'package:evcompanion2/controller/ev_stations_service/ev_station_services.dart';
 import 'package:evcompanion2/utils/colorConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:evcompanion2/splash_screen/splash_screen.dart';
@@ -15,8 +16,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -25,6 +24,7 @@ class MyApp extends StatelessWidget {
         return MultiProvider(
           providers: [
             ChangeNotifierProvider(create: (context) => AddVehicleProvider()),
+            ChangeNotifierProvider(create: (context) => EvStationsServices()),
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,

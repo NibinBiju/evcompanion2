@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:evcompanion2/controller/ev_stations_service/ev_station_services.dart';
 import 'package:evcompanion2/presentation/view/homepage/widgets/ev_list_view.dart';
 import 'package:evcompanion2/presentation/view/homepage/widgets/ev_map_view.dart';
 import 'package:evcompanion2/utils/colorConstants.dart';
@@ -9,6 +10,7 @@ import 'package:location/location.dart';
 import 'package:flutter_google_places/flutter_google_places.dart' as loc;
 import 'package:google_maps_webservice/places.dart' as places;
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -20,17 +22,17 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   TextEditingController searchController = TextEditingController();
   Location locationController = Location();
-  // static const LatLng _pGooglePlex = LatLng(37.346, -122.0090);
   static const LatLng _pApplepark = LatLng(37.346, -122.0090);
   static const LatLng _destination = LatLng(10.011104, 76.343877);
-  final Completer<GoogleMapController> _mapController = Completer();
-
+  final Completer<GoogleMapController> mapController = Completer();
   BitmapDescriptor customMarkerIcon = BitmapDescriptor.defaultMarker;
 
   bool viewCategoryCheck = true;
   List viewCategoryPages = [
-    MapView(),
-    EvListView(),
+    MapView(
+      key: UniqueKey(),
+    ),
+    const EvListView(),
   ];
   int pageViewCategoryIndex = 0;
 
@@ -52,12 +54,15 @@ class _HomepageState extends State<Homepage> {
   @override
   void initState() {
     super.initState();
+
     addCustomMarker();
     getLocationupdaets();
   }
 
   @override
   Widget build(BuildContext context) {
+    var evLocationController = Provider.of<EvStationsServices>(context);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: myappColor,
@@ -94,8 +99,9 @@ class _HomepageState extends State<Homepage> {
               children: [
                 viewCategoryCheck
                     ? GoogleMap(
+                        key: widget.key,
                         onMapCreated: (GoogleMapController mapcontroller) {
-                          _mapController.complete(mapcontroller);
+                          mapController.complete(mapcontroller);
                         },
                         zoomControlsEnabled: false,
                         initialCameraPosition:
@@ -105,16 +111,19 @@ class _HomepageState extends State<Homepage> {
                               markerId: const MarkerId('_currentPositon'),
                               icon: BitmapDescriptor.defaultMarker,
                               position: _currentP!),
-                          Marker(
-                              markerId: const MarkerId('_destination'),
-                              icon: BitmapDescriptor.defaultMarker,
-                              position: _destination,
-                              onTap: () {}),
-                          const Marker(
-                            markerId: MarkerId('_desitinationLocation'),
-                            icon: BitmapDescriptor.defaultMarker,
-                            position: _pApplepark,
-                          ),
+
+                          //evlocation markers
+                          for (var evLocation
+                              in evLocationController.stationData)
+                            Marker(
+                              markerId: MarkerId(evLocation["stationName"]),
+                              position: LatLng(evLocation["latitude"],
+                                  evLocation["longitude"]),
+                              infoWindow: InfoWindow(
+                                title: evLocation["stationName"],
+                                snippet: evLocation["location"],
+                              ),
+                            ),
                         },
                       )
                     : Container(),
@@ -253,6 +262,7 @@ class _HomepageState extends State<Homepage> {
                                         ),
                                         decoration: const InputDecoration(
                                           hintText: 'search',
+                                          isDense: false,
                                           border: InputBorder.none,
                                         ),
                                       ),
@@ -262,8 +272,8 @@ class _HomepageState extends State<Homepage> {
                                 InkWell(
                                   onTap: () {
                                     if (_currentP != null &&
-                                        _mapController.isCompleted) {
-                                      _mapController.future.then((controller) {
+                                        mapController.isCompleted) {
+                                      mapController.future.then((controller) {
                                         controller.animateCamera(
                                           CameraUpdate.newCameraPosition(
                                             CameraPosition(
@@ -293,7 +303,6 @@ class _HomepageState extends State<Homepage> {
                   ],
                 ),
                 //list of pages in home
-
                 viewCategoryPages[pageViewCategoryIndex],
               ],
             ),
@@ -354,7 +363,7 @@ class _HomepageState extends State<Homepage> {
           double lng = result['geometry']['location']['lng'];
           LatLng selectedLocation = LatLng(lat, lng);
 
-          _mapController.future.then((controller) {
+          mapController.future.then((controller) {
             controller.animateCamera(
               CameraUpdate.newCameraPosition(
                 CameraPosition(
