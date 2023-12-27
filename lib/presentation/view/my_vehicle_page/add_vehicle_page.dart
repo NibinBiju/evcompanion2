@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:evcompanion2/controller/add_vehicle_controller/add_vehicle_provider.dart';
 import 'package:evcompanion2/utils/colorConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddVehiclePage extends StatefulWidget {
   const AddVehiclePage({super.key});
@@ -16,6 +19,17 @@ class _AddVehiclePageState extends State<AddVehiclePage> {
   final TextEditingController _uidNumberController = TextEditingController();
   final TextEditingController _betteryCapacityController =
       TextEditingController();
+
+  XFile? _image;
+ 
+  Future<void> pickImage() async {
+     final ImagePicker _picker=ImagePicker();
+    final XFile? pickedFile=await _picker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      _image=pickedFile;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -121,13 +135,20 @@ class _AddVehiclePageState extends State<AddVehiclePage> {
                   color: const Color.fromARGB(255, 216, 216, 216),
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: const Center(
-                  child: Icon(
-                    Icons.add,
-                    size: 50,
-                    color: Colors.grey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                  _image == null
+                  ? Text('Please select an image')
+                : Image.file(File(_image!.path)),
+                      IconButton(
+                      onPressed: () async{
+                      await  pickImage();
+                      },
+                        icon: Icon(Icons.add),
+                    ),
+                    ],
                   ),
-                ),
               ),
               const SizedBox(
                 height: 20,

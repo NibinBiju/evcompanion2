@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:evcompanion2/presentation/view/homepage/filter.dart';
 import 'package:evcompanion2/controller/ev_stations_service/ev_station_services.dart';
 import 'package:evcompanion2/presentation/view/homepage/widgets/ev_list_view.dart';
 import 'package:evcompanion2/presentation/view/homepage/widgets/ev_map_view.dart';
@@ -224,6 +225,7 @@ class _HomepageState extends State<Homepage> {
                             padding: const EdgeInsets.all(13),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(
                                   width: 290,
@@ -285,16 +287,34 @@ class _HomepageState extends State<Homepage> {
                                       });
                                     }
                                   },
-                                  child: const CircleAvatar(
-                                    radius: 33,
-                                    backgroundColor: Colors.green,
-                                    child: Center(
-                                      child: Icon(
-                                        Icons.gps_fixed_outlined,
-                                        color: Colors.white,
+                                  child: Column(
+                                    children: [
+                                      const CircleAvatar(
+                                        radius: 33,
+                                        backgroundColor: Colors.green,
+                                        child: Center(
+                                          child: Icon(
+                                            Icons.gps_fixed_outlined,
+                                            color: Colors.white,
+                                          ),
+                                        ),
                                       ),
-                                    ),
+                                      SizedBox(height: 10,),
+                                      CircleAvatar(
+                                        radius: 30,
+                                        backgroundColor: Colors.green,
+                                        child: Center(
+                                          child: IconButton(onPressed: (){
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(builder:(context)=>Filter()));
+                                          },
+                                           icon: Icon(Icons.format_align_center_outlined,
+                                           color: Colors.white,)),
+                                        ),
+                                      )
+                                    ],
                                   ),
+
                                 ),
                               ],
                             ),
