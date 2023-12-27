@@ -78,7 +78,7 @@ class _PaymentSlotState extends State<PaymentSlot> {
                 ),
               ],
             ),
-            InkWell(
+           isCheck ? InkWell(
               onTap: () {
                 Navigator.push(
                   context,
@@ -105,6 +105,13 @@ class _PaymentSlotState extends State<PaymentSlot> {
                   ),
                 ),
               ),
+            ):Container(
+               width: double.infinity,
+                height: 70,
+                decoration: BoxDecoration(
+                  color: Colors.grey,
+                  borderRadius: BorderRadius.circular(20),
+                ),
             ),
           ],
         ),

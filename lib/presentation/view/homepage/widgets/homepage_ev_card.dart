@@ -1,6 +1,8 @@
 import 'package:evcompanion2/presentation/view/details_page/details_page.dart';
 import 'package:flutter/material.dart';
 
+import '../../booking_page/booking_page.dart';
+
 class HomepageCard extends StatelessWidget {
   const HomepageCard({
     super.key,
@@ -190,18 +192,26 @@ class HomepageCard extends StatelessWidget {
                     ),
 
                     //book station button
-                    Container(
-                      width: 140,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(13),
-                        color: Colors.green,
-                      ),
-                      child: const Center(
-                        child: Text(
-                          'Book charge',
-                          style: TextStyle(
-                            color: Colors.white,
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return const BookingPage();
+                        }));
+                      },
+                      child: Container(
+                        width: 140,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(13),
+                          color: Colors.green,
+                        ),
+                        child: const Center(
+                          child: Text(
+                            'Book charge',
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),

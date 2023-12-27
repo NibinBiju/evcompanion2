@@ -34,6 +34,16 @@ class Filter extends StatelessWidget {
       'assets/wifi.png',
       'assets/shopping_bag.png'
     ];
+    List<String> PlugtypeImage = [
+      'assets/BS1854-removebg-preview.png',
+      'assets/ms1548-removebg-preview.png',
+      'assets/bs1845-removebg-preview.png',
+      'assets/bs1054-removebg-preview.png',
+      'assets/BS1655-removebg-preview.png',
+      'assets/BS1854-removebg-preview.png',
+      'assets/BS1254-removebg-preview.png',
+      'assets/BS1000-removebg-preview.png'
+    ];
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -72,20 +82,25 @@ class Filter extends StatelessWidget {
                           Row(
                             children: [
                               Container(
-                                width: 100,
+                                width: 50,
+                                height: 50,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  image: DecorationImage(
-                                    image: AssetImage("assets/shopping_bag.png"),
+                                  image: DecorationImage(fit: BoxFit.fill,
+                                    image: AssetImage(PlugtypeImage[index]),  
                                     alignment: Alignment.centerLeft,
                                   ),
                                 ),
                               ),
-                              Text(
-                                plugTypes[index],
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
+                              
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Text(
+                                  plugTypes[index],
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
                             ],

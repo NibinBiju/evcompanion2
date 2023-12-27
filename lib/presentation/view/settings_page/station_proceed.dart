@@ -180,7 +180,7 @@ class StationProceed extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: InkWell(
                onTap: (){
-                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>StationProceed()));
+              //  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>StationProceed()));
               },
               child: Container(
                 width: double.infinity,
