@@ -1,6 +1,8 @@
 // ignore_for_file: sized_box_for_whitespace
+import 'package:evcompanion2/presentation/view/payment_page_slot/payment_page_slot.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class BookingPage extends StatefulWidget {
   const BookingPage({super.key});
@@ -10,7 +12,7 @@ class BookingPage extends StatefulWidget {
 }
 
 class _BookingPageState extends State<BookingPage> {
-  double _sliderValue = 50.0;
+  double _sliderValue = 1.0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,29 +64,32 @@ class _BookingPageState extends State<BookingPage> {
                         spreadRadius: 1.0,
                       )
                     ]),
-                child: SfDateRangePicker(
-                  selectionTextStyle: const TextStyle(
-                    fontSize: 18,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SfDateRangePicker(
+                    selectionTextStyle: const TextStyle(
+                      fontSize: 18,
+                    ),
+                    monthCellStyle: const DateRangePickerMonthCellStyle(
+                        todayTextStyle: TextStyle(
+                          fontSize: 18,
+                        ),
+                        textStyle: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black,
+                        )),
+                    showNavigationArrow: true,
+                    headerStyle: const DateRangePickerHeaderStyle(
+                        textStyle: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 17,
+                      color: Colors.black,
+                    )),
+                    showTodayButton: true,
+                    allowViewNavigation: true,
+                    cancelText: 'back',
+                    selectionMode: DateRangePickerSelectionMode.single,
                   ),
-                  monthCellStyle: const DateRangePickerMonthCellStyle(
-                      todayTextStyle: TextStyle(
-                        fontSize: 18,
-                      ),
-                      textStyle: TextStyle(
-                        fontSize: 18,
-                        color: Colors.black,
-                      )),
-                  showNavigationArrow: true,
-                  headerStyle: const DateRangePickerHeaderStyle(
-                      textStyle: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 17,
-                    color: Colors.black,
-                  )),
-                  showTodayButton: true,
-                  allowViewNavigation: true,
-                  cancelText: 'back',
-                  selectionMode: DateRangePickerSelectionMode.single,
                 ),
               ),
               const SizedBox(
@@ -159,9 +164,7 @@ class _BookingPageState extends State<BookingPage> {
                 height: 20,
               ),
               Container(
-                padding: const EdgeInsets.all(8),
-                width: double.infinity,
-                height: 130,
+                padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: Colors.grey[300],
@@ -176,21 +179,84 @@ class _BookingPageState extends State<BookingPage> {
                         fontWeight: FontWeight.w700,
                       ),
                     ),
-                    Text('Selected Value: $_sliderValue'),
-                    const SizedBox(height: 20),
-                    Slider(
+                    SfSlider(
+                      labelPlacement: LabelPlacement.onTicks,
                       value: _sliderValue,
-                      min: 0,
-                      max: 100,
                       onChanged: (value) {
                         setState(() {
                           _sliderValue = value;
                         });
                       },
+                      min: 1.0,
+                      max: 10.0,
+                      showTicks: true,
+                      showDividers: true,
+                      showLabels: true,
+                      enableTooltip: true,
+                      minorTicksPerInterval: 1,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'hour',
+                          style: TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.w700),
+                        ),
+                        Text(
+                          '${_sliderValue.round()}',
+                          style: const TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.w700),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Price Estimation',
+                          style: TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.w700),
+                        ),
+                        Text(
+                          '${_sliderValue.round() * 150}',
+                          style: const TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.w700),
+                        ),
+                      ],
                     ),
                   ],
                 ),
               ),
+              const SizedBox(
+                height: 20,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return PaymentSlot();
+                  }));
+                },
+                child: Container(
+                  width: double.infinity,
+                  height: 70,
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: const Center(
+                    child: Text(
+                      'Continue',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              )
             ],
           ),
         ),

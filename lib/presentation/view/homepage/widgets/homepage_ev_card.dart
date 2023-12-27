@@ -4,7 +4,12 @@ import 'package:flutter/material.dart';
 class HomepageCard extends StatelessWidget {
   const HomepageCard({
     super.key,
+    required this.stationName, required this.location,
   });
+
+  final String stationName;
+  final String location;
+
 
   @override
   Widget build(BuildContext context) {
@@ -27,22 +32,22 @@ class HomepageCard extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                const Row(
+                Row(
                   children: [
                     Text(
-                      'SuperCharger station',
-                      style: TextStyle(
+                      stationName,
+                      style:const TextStyle(
                         fontSize: 21,
                         fontWeight: FontWeight.w600,
                       ),
                     )
                   ],
                 ),
-                const Row(
+                 Row(
                   children: [
                     Text(
-                      'Station Location',
-                      style: TextStyle(
+                      location,
+                      style:const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                       ),
@@ -150,7 +155,7 @@ class HomepageCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Row(
@@ -161,7 +166,7 @@ class HomepageCard extends StatelessWidget {
                       onTap: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return DetailsPage();
+                          return const DetailsPage();
                         }));
                       },
                       child: Container(

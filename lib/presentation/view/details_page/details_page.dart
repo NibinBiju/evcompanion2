@@ -365,7 +365,7 @@ class _DetailsPageState extends State<DetailsPage> {
                           },
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 90,
                       ),
                     ],
