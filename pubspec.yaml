@@ -53,6 +53,7 @@ dependencies:
   syncfusion_flutter_datepicker: ^24.1.41
   percent_indicator: ^4.2.3
   image_picker: ^1.0.5
+  flutter_advanced_switch: ^3.0.1
 
 
 dev_dependencies:
