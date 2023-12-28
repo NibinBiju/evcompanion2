@@ -26,6 +26,8 @@ class EvListView extends StatelessWidget {
               child: HomepageCard(
                 stationName: data['stationName'],
                 location: data['location'],
+                portName: data['chargingPlugs'][index]['name'],
+
               ),
             );
           })),

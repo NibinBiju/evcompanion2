@@ -32,6 +32,8 @@ class _MapViewState extends State<MapView> {
             return HomepageCard(
               stationName: data['stationName'],
               location: data['location'],
+              portName: data['chargingPlugs'][0]['name'],
+
             );
           },
           options: CarouselOptions(

@@ -6,11 +6,12 @@ import '../../booking_page/booking_page.dart';
 class HomepageCard extends StatelessWidget {
   const HomepageCard({
     super.key,
-    required this.stationName, required this.location,
+    required this.stationName, required this.location, required this.portName,
   });
 
   final String stationName;
   final String location;
+  final String portName;
 
 
   @override
@@ -77,8 +78,8 @@ class HomepageCard extends StatelessWidget {
                               child:
                                   Image.asset('assets/fast_charging_port.png'),
                             ),
-                            title: const Text(
-                              'Charger A',
+                            title:  Text(
+                              portName,
                               style: TextStyle(
                                 fontSize: 11,
                                 fontWeight: FontWeight.w600,
