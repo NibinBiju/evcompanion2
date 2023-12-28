@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../view/login_screen/login_screen.dart';
+import '../view/settings_page/profile.dart';
 
 class CardWidget1 extends StatelessWidget {
   final IconData icons;
@@ -6,11 +8,11 @@ class CardWidget1 extends StatelessWidget {
   final Widget pageName;
 
   const CardWidget1({
-    super.key,
+    Key? key,
     required this.icons,
     required this.iconName,
-    required this.pageName,
-  });
+    required this.pageName, required Null Function() onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Card(
@@ -19,19 +21,51 @@ class CardWidget1 extends StatelessWidget {
         ),
         color: Colors.grey[200],
         child: InkWell(
-            child: ListTile(
-              contentPadding: const EdgeInsets.all(15),
-              horizontalTitleGap: 30,
-              leading: Icon(
-                icons,
-                color: Colors.black,
-              ),
-              title: Text(iconName),
-              trailing: const Icon(Icons.navigate_next),
+          child: ListTile(
+            contentPadding: const EdgeInsets.all(15),
+            horizontalTitleGap: 30,
+            leading: Icon(
+              icons,
+              color: Colors.black,
             ),
-            onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => pageName));
-            }),
+            title: Text(iconName),
+            trailing: const Icon(Icons.navigate_next),
+          ),
+          onTap: () {
+            if (iconName == 'LogOut') {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text("Alert"),
+                    content: Text("Are you sure you want to log out?"),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text("Cancel"),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          //Navigator.pop(context); 
+                          //Navigator.pop(context);
+                          Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => LoginScreen()));
+               
+                        },
+                        child: Text("Logout"),
+                      ),
+                    ],
+                  );
+                },
+              );
+            } 
+            // else {
+            //   Navigator.of(context).push(
+            //     MaterialPageRoute(builder: (context) => Profile()));
+            // }
+          },
+        ),
       );
 }
