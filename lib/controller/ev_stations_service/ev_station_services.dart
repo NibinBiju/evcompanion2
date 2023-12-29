@@ -193,4 +193,6 @@ class EvStationsServices with ChangeNotifier {
       "image": "https://example.com/solarspark_station_5.jpg"
     }
   ];
+
+  
 }

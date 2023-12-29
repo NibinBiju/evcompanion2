@@ -32,7 +32,7 @@ class _ProfileState extends State<Profile> {
     "My Favourite",
     "My Booking",
     "Terms & Conditions",
-    "LogOut",
+    "Logout",
   ];
   static const icons = <IconData>[
     Icons.person,
@@ -170,11 +170,9 @@ class _ProfileState extends State<Profile> {
                             icons: icons[index],
                             pageName: pages[index],
                             onTap: () {
-                              if (index == iconName.length - 1) {
-                                // If Logout is pressed, show confirmation dialog
+                              if (index == pages.length) {
                                 _showLogoutDialog();
                               } else {
-                                // Navigate to the respective page
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -182,7 +180,7 @@ class _ProfileState extends State<Profile> {
                                   ),
                                 );
                               }
-                            },
+                             },
                           ),
                         );
                       },
