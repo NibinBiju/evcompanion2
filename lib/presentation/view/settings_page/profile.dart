@@ -1,4 +1,5 @@
 import 'package:evcompanion2/presentation/view/homepage/home.dart';
+import 'package:evcompanion2/presentation/view/settings_page/adminlogin.dart';
 import 'package:evcompanion2/utils/colorConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -103,6 +104,9 @@ class _ProfileState extends State<Profile> {
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35),
         ),
         centerTitle: true,
+        leading: IconButton(onPressed: (){
+          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Admin()));
+        }, icon: Icon(Icons.admin_panel_settings,size: 40,)),
       ),
       body: SingleChildScrollView(
         child: Column(
