@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../booking_page/booking_page.dart';
 
-class HomepageCard extends StatelessWidget {
+class HomepageCard extends StatefulWidget {
   const HomepageCard({
     super.key,
     required this.stationName, required this.location, required this.portName,
@@ -13,7 +13,13 @@ class HomepageCard extends StatelessWidget {
   final String location;
   final String portName;
 
+  @override
+  State<HomepageCard> createState() => _HomepageCardState();
+}
 
+class _HomepageCardState extends State<HomepageCard> {
+  bool addtoFavorite=false;
+  
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -38,7 +44,7 @@ class HomepageCard extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      stationName,
+                      widget.stationName,
                       style:const TextStyle(
                         fontSize: 21,
                         fontWeight: FontWeight.w600,
@@ -49,7 +55,7 @@ class HomepageCard extends StatelessWidget {
                  Row(
                   children: [
                     Text(
-                      location,
+                      widget.location,
                       style:const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -79,7 +85,7 @@ class HomepageCard extends StatelessWidget {
                                   Image.asset('assets/fast_charging_port.png'),
                             ),
                             title:  Text(
-                              portName,
+                              widget.portName,
                               style: TextStyle(
                                 fontSize: 11,
                                 fontWeight: FontWeight.w600,
@@ -227,10 +233,16 @@ class HomepageCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.favorite_outline,
-                      color: Colors.green,
+                    onPressed: () {
+                      setState(() {
+                        addtoFavorite=!addtoFavorite;
+                      });
+                    },
+                    icon:  Icon(
+                      // Icons.favorite_outline,
+                      // color: Colors.green,
+                      addtoFavorite? Icons.favorite:Icons.favorite_outline,
+                      color: addtoFavorite?Colors.green:Colors.green,
                     )),
               ],
             )
