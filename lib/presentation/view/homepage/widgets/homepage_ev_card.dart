@@ -6,14 +6,14 @@ class HomepageCard extends StatelessWidget {
     Key? key,
     required this.stationName,
     required this.location,
-    required this.portName, required this.stationDetails,
+    required this.portName,
+    required this.stationDetails,
   }) : super(key: key);
 
   final String stationName;
   final String location;
   final List<Map<String, dynamic>> portName;
   final Map<String, dynamic> stationDetails;
-
 
   @override
   Widget build(BuildContext context) {
@@ -118,7 +118,6 @@ class HomepageCard extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) {
-
                         //view station page
                         return DetailsPage(
                           stationName: stationName,
