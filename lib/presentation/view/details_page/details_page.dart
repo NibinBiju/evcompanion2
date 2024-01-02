@@ -158,12 +158,16 @@ class _DetailsPageState extends State<DetailsPage> {
                                     Text(
                                       pageNo.toString(),
                                       style: const TextStyle(
-                                          color: Colors.green, fontSize: 20),
+                                        color: Colors.green,
+                                        fontSize: 20,
+                                      ),
                                     ),
                                     Text(
                                       '/${ofImages.length}',
                                       style: const TextStyle(
-                                          color: Colors.black, fontSize: 20),
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                      ),
                                     )
                                   ],
                                 ),
