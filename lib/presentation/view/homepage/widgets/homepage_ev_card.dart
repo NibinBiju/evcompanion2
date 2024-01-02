@@ -1,9 +1,13 @@
+import 'package:evcompanion2/controller/favorite_controller/f_controller.dart';
+import 'package:evcompanion2/model/favorite_model.dart';
 import 'package:evcompanion2/presentation/view/details_page/details_page.dart';
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
 import '../../booking_page/booking_page.dart';
+import '../../settings_page/my_favourite.dart';
 
 class HomepageCard extends StatefulWidget {
+   static final List<HomepageCard>favoritesList=[];
   const HomepageCard({
     super.key,
     required this.stationName, required this.location, required this.portName,
@@ -19,9 +23,13 @@ class HomepageCard extends StatefulWidget {
 
 class _HomepageCardState extends State<HomepageCard> {
   bool addtoFavorite=false;
+  FavoriteController favoriteController=FavoriteController();
+
   
   @override
   Widget build(BuildContext context) {
+    var favContro=Provider.of<FavoriteController>(context);
+
     return Card(
       elevation: 10,
       borderOnForeground: false,
@@ -234,9 +242,12 @@ class _HomepageCardState extends State<HomepageCard> {
               children: [
                 IconButton(
                     onPressed: () {
-                      setState(() {
-                        addtoFavorite=!addtoFavorite;
-                      });
+if(favContro.favoriteList.any((element) => element.stationName==widget.stationName)){
+    return;
+}else{
+favContro.addToFav(FavoriteModel(stationName: widget.stationName, location:widget.location));
+}
+                     
                     },
                     icon:  Icon(
                       // Icons.favorite_outline,
