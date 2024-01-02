@@ -31,6 +31,7 @@ class _MyVehicleState extends State<MyVehicle> {
     try {
       var uri = Uri.parse('http://10.0.2.2:8000/api/addVehicle/');
       var response = await http.get(uri);
+
       print(response.statusCode);
       print(response.body);
       jsondata = jsonDecode(response.body);
@@ -45,6 +46,10 @@ class _MyVehicleState extends State<MyVehicle> {
       print('hi');
     }
   }
+
+  
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +78,7 @@ class _MyVehicleState extends State<MyVehicle> {
       floatingActionButton: InkWell(
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (cnt) {
-            return AddVehiclePage();
+            return const AddVehiclePage();
           }));
         },
         child: Padding(
@@ -123,9 +128,9 @@ class _MyVehicleState extends State<MyVehicle> {
             )
           : SingleChildScrollView(
               child: Column(
-                children: List.generate(
-                  addVehicleModel?.data?.length ?? 0,
-                  (index) => Padding(
+                children:
+                    List.generate(addVehicleModel?.data?.length ?? 0, (index) {
+                  return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Card(
                       shadowColor: Colors.black,
@@ -156,8 +161,10 @@ class _MyVehicleState extends State<MyVehicle> {
                                 width: 130,
                                 height: 130,
                                 decoration: BoxDecoration(
-                                  image: const DecorationImage(
-                                    image: AssetImage('assets/tesla.jpg'),
+                                  image: DecorationImage(
+                                    image: NetworkImage(addVehicleModel
+                                            ?.data?[index].vehicleImage ??
+                                        ''),
                                   ),
                                   borderRadius: BorderRadius.circular(19),
                                   border: Border.all(
@@ -234,8 +241,8 @@ class _MyVehicleState extends State<MyVehicle> {
                         ),
                       ),
                     ),
-                  ),
-                ),
+                  );
+                }),
               ),
             ),
     );

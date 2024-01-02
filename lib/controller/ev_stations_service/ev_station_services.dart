@@ -1,6 +1,9 @@
+import 'package:evcompanion2/model/ev_data_model/ev_data_model.dart';
 import 'package:flutter/material.dart';
 
 class EvStationsServices with ChangeNotifier {
+  ChargingStation? chargingStation;
+
   List<Map<String, dynamic>> stationData = [
     {
       "stationName": "PowerCharge Station 1",
@@ -16,25 +19,15 @@ class EvStationsServices with ChangeNotifier {
           "name": "GB/T",
           "status": "Available",
           "capacity": "50 kW",
-          "image": "assets/gb_t.png"
+          "image": "assets/gb_t.png",
+          "acType": "AC Type 2"
         },
         {
           "name": "CC COMBO TYPE 2",
           "status": "Occupied",
           "capacity": "50 kW",
-          "image": "assets/ccs combo type 2.png"
-        },
-        {
-          "name": "Plug C",
-          "status": "Available",
-          "capacity": "50 kW",
-          "image": "assets/ccs combo type 1.png"
-        },
-        {
-          "name": "CHADEMO",
-          "status": "Under Maintenance",
-          "capacity": "50 kW",
-          "image": "assets/chademo.png"
+          "image": "assets/ccs combo type 2.png",
+          "acType": "AC Type 2"
         }
       ],
       "amenities": [
@@ -61,13 +54,15 @@ class EvStationsServices with ChangeNotifier {
           "name": "CC COMBO TYPE 2",
           "status": "Available",
           "capacity": "150 kW",
-          "image": "assets/ccs combo type 2.png"
+          "image": "assets/ccs combo type 2.png",
+          "acType": "AC Type 2"
         },
         {
           "name": "GB/T",
           "status": "Available",
           "capacity": "150 kW",
-          "image": "assets/gb_t.png"
+          "image": "assets/gb_t.png",
+          "acType": "AC Type 2"
         }
       ],
       "amenities": [
@@ -90,13 +85,15 @@ class EvStationsServices with ChangeNotifier {
           "name": "GB/T",
           "status": "Available",
           "capacity": "150 kW",
-          "image": "assets/gb_t.png"
+          "image": "assets/gb_t.png",
+          "acType": "AC Type 2"
         },
         {
           "name": "CC COMBO TYPE 2",
           "status": "Occupied",
           "capacity": "50 kW",
-          "image": "assets/ccs combo type 2.png"
+          "image": "assets/ccs combo type 2.png",
+          "acType": "AC Type 2"
         }
       ],
       "amenities": [
@@ -123,31 +120,15 @@ class EvStationsServices with ChangeNotifier {
           "name": "Type 2 Mennekes",
           "status": "Available",
           "capacity": "50 kW",
-          "image": "assets/type 2 mennekes.png"
+          "image": "assets/type 2 mennekes.png",
+          "acType": "AC Type 2"
         },
         {
           "name": "CC COMBO TYPE 2",
           "status": "Occupied",
           "capacity": "50 kW",
-          "image": "assets/ccs combo type 2.png"
-        },
-        {
-          "name": "CC COMBO TYPE 2",
-          "status": "Occupied",
-          "capacity": "50 kW",
-          "image": "assets/ccs combo type 2.png"
-        },
-        {
-          "name": "Plug C",
-          "status": "Available",
-          "capacity": "50 kW",
-          "image": "assets/ccs combo type 1.png"
-        },
-        {
-          "name": "CHADEMO",
-          "status": "Under Maintenance",
-          "capacity": "50 kW",
-          "image": "assets/chademo.png"
+          "image": "assets/ccs combo type 2.png",
+          "acType": "AC Type 2"
         }
       ],
       "amenities": [
@@ -174,13 +155,15 @@ class EvStationsServices with ChangeNotifier {
           "name": "Plug A",
           "status": "Available",
           "capacity": "150 kW",
-          "image": "https://example.com/plug_a.jpg"
+          "image": "https://example.com/plug_a.jpg",
+          "acType": "AC Type 2"
         },
         {
           "name": "Plug B",
           "status": "Operational",
           "capacity": "150 kW",
-          "image": "https://example.com/plug_b.jpg"
+          "image": "https://example.com/plug_b.jpg",
+          "acType": "AC Type 2"
         }
       ],
       "amenities": [
@@ -193,4 +176,13 @@ class EvStationsServices with ChangeNotifier {
       "image": "https://example.com/solarspark_station_5.jpg"
     }
   ];
+
+  List<ChargingStation> get chargingStations =>
+      _convertJsonDataToChargingStations();
+
+  List<ChargingStation> _convertJsonDataToChargingStations() {
+    return stationData
+        .map((jsonStation) => ChargingStation.fromJson(jsonStation))
+        .toList();
+  }
 }

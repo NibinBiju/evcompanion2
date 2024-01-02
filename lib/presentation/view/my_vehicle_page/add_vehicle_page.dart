@@ -4,7 +4,6 @@ import 'package:evcompanion2/controller/add_vehicle_controller/add_vehicle_provi
 import 'package:evcompanion2/utils/colorConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:image_picker/image_picker.dart';
 
 class AddVehiclePage extends StatefulWidget {
   const AddVehiclePage({super.key});
@@ -16,20 +15,20 @@ class AddVehiclePage extends StatefulWidget {
 class _AddVehiclePageState extends State<AddVehiclePage> {
   final TextEditingController _modelNameController = TextEditingController();
   final TextEditingController _brandNameController = TextEditingController();
-  final TextEditingController _uidNumberController = TextEditingController();
   final TextEditingController _betteryCapacityController =
       TextEditingController();
 
-  XFile? _image;
- 
-  Future<void> pickImage() async {
-     final ImagePicker _picker=ImagePicker();
-    final XFile? pickedFile=await _picker.pickImage(source: ImageSource.gallery);
+  // XFile? _image;
 
-    setState(() {
-      _image=pickedFile;
-    });
-  }
+  // Future<void> pickImage() async {
+  //   final ImagePicker _picker = ImagePicker();
+  //   final XFile? pickedFile =
+  //       await _picker.pickImage(source: ImageSource.gallery);
+
+  //   setState(() {
+  //     _image = pickedFile;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +38,7 @@ class _AddVehiclePageState extends State<AddVehiclePage> {
       floatingActionButton: InkWell(
         onTap: () {
           addVehicleProvider.addVehiclePostData(
-              uid: _uidNumberController.text,
+              // uid: _uidNumberController.text,
               make: _brandNameController.text,
               model: _modelNameController.text,
               year: '2023',
@@ -128,27 +127,31 @@ class _AddVehiclePageState extends State<AddVehiclePage> {
                   ),
                 ],
               ),
-              Container(
-                width: double.infinity,
-                height: 150,
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 216, 216, 216),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                  _image == null
-                  ? Text('Please select an image')
-                : Image.file(File(_image!.path)),
-                      IconButton(
-                      onPressed: () async{
-                      await  pickImage();
-                      },
-                        icon: Icon(Icons.add),
-                    ),
-                    ],
+              InkWell(
+                onTap: () async {
+                  await addVehicleProvider.pickImage();
+                },
+                child: Container(
+                  width: double.infinity,
+                  height: 150,
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 216, 216, 216),
+                    borderRadius: BorderRadius.circular(20),
                   ),
+                  child: addVehicleProvider.image == null
+                      ? Center(
+                          child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Please select an image'),
+                            Icon(Icons.add),
+                          ],
+                        ))
+                      : Image.file(
+                          File(addVehicleProvider.image!.path),
+                          fit: BoxFit.cover,
+                        ),
+                ),
               ),
               const SizedBox(
                 height: 20,

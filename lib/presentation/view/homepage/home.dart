@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:evcompanion2/presentation/view/homepage/filter.dart';
+import 'package:evcompanion2/presentation/view/homepage/filter/filter.dart';
 import 'package:evcompanion2/controller/ev_stations_service/ev_station_services.dart';
 import 'package:evcompanion2/presentation/view/homepage/widgets/ev_list_view.dart';
 import 'package:evcompanion2/presentation/view/homepage/widgets/ev_map_view.dart';
@@ -117,7 +117,9 @@ class _HomepageState extends State<Homepage> {
                           for (var evLocation
                               in evLocationController.stationData)
                             Marker(
-                              markerId: MarkerId(evLocation["stationName"]),
+                              markerId: MarkerId(
+                                evLocation["stationName"],
+                              ),
                               position: LatLng(evLocation["latitude"],
                                   evLocation["longitude"]),
                               infoWindow: InfoWindow(
@@ -299,22 +301,29 @@ class _HomepageState extends State<Homepage> {
                                           ),
                                         ),
                                       ),
-                                      SizedBox(height: 10,),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
                                       CircleAvatar(
                                         radius: 30,
                                         backgroundColor: Colors.green,
                                         child: Center(
-                                          child: IconButton(onPressed: (){
-                                            Navigator.of(context).push(
-                                              MaterialPageRoute(builder:(context)=>Filter()));
-                                          },
-                                           icon: Icon(Icons.format_align_center_outlined,
-                                           color: Colors.white,)),
+                                          child: IconButton(
+                                              onPressed: () {
+                                                Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            Filter()));
+                                              },
+                                              icon: Icon(
+                                                Icons
+                                                    .format_align_center_outlined,
+                                                color: Colors.white,
+                                              )),
                                         ),
                                       )
                                     ],
                                   ),
-
                                 ),
                               ],
                             ),

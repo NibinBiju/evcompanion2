@@ -3,7 +3,7 @@
 import 'package:evcompanion2/controller/add_vehicle_controller/add_vehicle_provider.dart';
 
 import 'package:evcompanion2/controller/ev_stations_service/ev_station_services.dart';
-import 'package:evcompanion2/presentation/view/homepage/filter.dart';
+import 'package:evcompanion2/presentation/view/homepage/filter/filter.dart';
 import 'package:evcompanion2/utils/colorConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:evcompanion2/splash_screen/splash_screen.dart';

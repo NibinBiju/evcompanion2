@@ -3,7 +3,9 @@ import 'package:evcompanion2/presentation/view/booking_page/booking_page.dart';
 import 'package:flutter/material.dart';
 
 class DetailsPage extends StatefulWidget {
-  const DetailsPage({super.key});
+  const DetailsPage({super.key, required this.stationName, required this.cost});
+  final String stationName;
+  final double cost;
 
   @override
   State<DetailsPage> createState() => _DetailsPageState();
@@ -206,9 +208,9 @@ class _DetailsPageState extends State<DetailsPage> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                'Greenspeed station',
-                                style: TextStyle(
+                              Text(
+                                widget.stationName,
+                                style: const TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 22,
                                 ),
@@ -218,11 +220,11 @@ class _DetailsPageState extends State<DetailsPage> {
                               ),
                               Container(
                                 padding: const EdgeInsets.all(8),
-                                child: const Row(
+                                child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'Cost:',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w600,
@@ -230,8 +232,8 @@ class _DetailsPageState extends State<DetailsPage> {
                                       ),
                                     ),
                                     Text(
-                                      '15.00/hour',
-                                      style: TextStyle(
+                                      '${widget.cost}/hour',
+                                      style: const TextStyle(
                                         fontWeight: FontWeight.w600,
                                         fontSize: 17,
                                       ),
