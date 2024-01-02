@@ -1,8 +1,6 @@
-import 'package:evcompanion2/model/ev_data_model/ev_data_model.dart';
 import 'package:flutter/material.dart';
 
 class EvStationsServices with ChangeNotifier {
-  ChargingStation? chargingStation;
 
   List<Map<String, dynamic>> stationData = [
     {
@@ -177,12 +175,4 @@ class EvStationsServices with ChangeNotifier {
     }
   ];
 
-  List<ChargingStation> get chargingStations =>
-      _convertJsonDataToChargingStations();
-
-  List<ChargingStation> _convertJsonDataToChargingStations() {
-    return stationData
-        .map((jsonStation) => ChargingStation.fromJson(jsonStation))
-        .toList();
-  }
 }
