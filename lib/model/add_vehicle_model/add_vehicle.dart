@@ -4,7 +4,6 @@
 
 import 'dart:convert';
 
-
 AddVehicleModel addVehicleFromJson(String str) =>
     AddVehicleModel.fromJson(json.decode(str));
 
@@ -73,3 +72,4 @@ class Datum {
         "vehicle_image": vehicleImage,
       };
 }
+

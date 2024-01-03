@@ -9,6 +9,4 @@ class FavoriteController with ChangeNotifier{
       print('hi');
       notifyListeners();
   }
-
-  
 }
