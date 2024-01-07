@@ -1,17 +1,16 @@
-import 'package:evcompanion2/presentation/view/homepage/home.dart';
 import 'package:evcompanion2/utils/colorConstants.dart';
+import 'package:evcompanion2/view_booking/view_booking.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:evcompanion2/presentation/widgets/card_widget1.dart';
 import 'package:evcompanion2/presentation/view/settings_page/my_profile.dart';
-import 'package:evcompanion2/presentation/view/settings_page/my_booking.dart';
 import 'package:evcompanion2/presentation/view/settings_page/my_favourite.dart';
 import 'package:evcompanion2/presentation/view/settings_page/terms_conditions.dart';
 import 'package:evcompanion2/presentation/view/my_vehicle_page/my_vehicle.dart';
-import 'package:evcompanion2/login_screen/login_screen.dart';
+import 'package:evcompanion2/presentation/view/login_screen/login_screen.dart';
 
 class Profile extends StatefulWidget {
-  const Profile({super.key});
+  const Profile({Key? key}) : super(key: key);
 
   @override
   State<Profile> createState() => _ProfileState();
@@ -22,7 +21,7 @@ class _ProfileState extends State<Profile> {
     myProfile(),
     const MyVehicle(),
     const MyFavourites(),
-    const MyBooking(),
+    const ViewBookingPage(),
     Terms_Conditions(),
     LoginScreen(),
   ];
@@ -32,7 +31,7 @@ class _ProfileState extends State<Profile> {
     "My Favourite",
     "My Booking",
     "Terms & Conditions",
-    "LogOut",
+    "Logout",
   ];
   static const icons = <IconData>[
     Icons.person,
@@ -44,6 +43,8 @@ class _ProfileState extends State<Profile> {
   ];
   late SharedPreferences preferences;
   String? name;
+  String? email;
+
   @override
   void initState() {
     fetchdata();
@@ -55,63 +56,102 @@ class _ProfileState extends State<Profile> {
     preferences = await SharedPreferences.getInstance();
     setState(() {
       name = preferences.getString('namekey')!;
+      email = preferences.getString('unamekey')!;
     });
+  }
+
+  Future<void> _showLogoutDialog() async {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Logout"),
+          content: const Text("Are you sure you want to logout?"),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: const Text("Cancel"),
+            ),
+            TextButton(
+              onPressed: () {
+                // Perform logout action here
+                // For example, you can clear the shared preferences
+                // and navigate to the login screen
+                preferences.clear();
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginScreen()),
+                );
+              },
+              child: const Text("Logout"),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Profile",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35),
+        ),
+        centerTitle: true,
+        // leading: IconButton(onPressed: (){
+        //   Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Admin()));
+        // }, icon: Icon(Icons.admin_panel_settings,size: 40,)),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Stack(
-              children: [
-                Container(
-                  height: 160,
-                  width: double.infinity,
-                  decoration: const BoxDecoration(
-                    color: myappColor,
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.elliptical(200, 60),
-                        bottomRight: Radius.elliptical(200, 60)),
-                  ),
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.white,
+                  width: 2,
                 ),
-                Positioned(
-                  left: 150,
-                  top: 60,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                          color: myappColor,
-                          width: 2,
-                        ),
-                        color: myappbarColor,
-                        shape: BoxShape.circle),
-                    width: 90,
-                    height: 90,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.person,
-                          size: 40,
-                          color: Colors.grey,
-                        ),
-                        Text(
-                          " $name",
-                          style: const TextStyle(
-                            fontSize: 18,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
+                color: myappbarColor,
+                shape: BoxShape.circle,
+              ),
+              padding: EdgeInsets.all(15),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircleAvatar(
+                    backgroundColor: Colors.grey,
+                    radius: 40.0,
+                    child: Icon(
+                      Icons.person,
+                      size: 60,
+                      color: Colors.white,
                     ),
                   ),
-                ),
-              ],
+                  Text(
+                    " $name",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                  Text(
+                    " $email",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
+              ),
             ),
+            SizedBox(height: 10),
             Container(
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: myappbarColor,
               ),
               height: MediaQuery.of(context).size.height,
@@ -119,25 +159,35 @@ class _ProfileState extends State<Profile> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // const SizedBox(
-                  //   height: 10,
-                  // ),
-                  // SizedBox(height: 20.h),
                   Expanded(
                     child: ListView.builder(
                       shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
+                      physics: NeverScrollableScrollPhysics(),
                       itemCount: iconName.length,
                       itemBuilder: (context, index) {
-                        return CardWidget1(
-                          iconName: iconName[index],
-                          icons: icons[index],
-                          pageName: pages[index],
+                        return Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: CardWidget1(
+                            iconName: iconName[index],
+                            icons: icons[index],
+                            pageName: pages[index],
+                            onTap: () {
+                              if (index == pages.length) {
+                                _showLogoutDialog();
+                              } else {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => pages[index],
+                                  ),
+                                );
+                              }
+                             },
+                          ),
                         );
                       },
                     ),
                   ),
-                  
                 ],
               ),
             ),

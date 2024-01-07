@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:evcompanion2/model/add_vehicle.dart';
+import 'package:evcompanion2/model/add_vehicle_model/add_vehicle.dart';
 import 'package:evcompanion2/presentation/view/my_vehicle_page/add_vehicle_page.dart';
 import 'package:evcompanion2/utils/colorConstants.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +29,7 @@ class _MyVehicleState extends State<MyVehicle> {
       isLoading = true;
     });
     try {
-      var uri = Uri.parse('http://127.0.0.1:8000/api/addVehicle/');
+      var uri = Uri.parse('http://10.0.2.2:8000/api/addVehicle/');
       var response = await http.get(uri);
       print(response.statusCode);
       print(response.body);

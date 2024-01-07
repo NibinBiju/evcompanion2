@@ -1,5 +1,7 @@
+import 'package:evcompanion2/controller/bookstation_controller.dart';
 import 'package:evcompanion2/utils/colorConstants.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ViewBookingPage extends StatefulWidget {
   const ViewBookingPage({super.key});
@@ -9,187 +11,133 @@ class ViewBookingPage extends StatefulWidget {
 }
 
 class _ViewBookingPageState extends State<ViewBookingPage> {
+
   int onTabbar = 0;
-  List tabBarPages = [
-    const BookedChargingStations(),
-    Center(
-      child: const Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('no history'),
-        ],
-      ),
-    ),
-  ];
+
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<StationbookController>(context);
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          bottom: TabBar(
-              onTap: (index) {
-                setState(() {
-                  onTabbar = index;
-                });
-              },
-              unselectedLabelColor: Colors.white54,
-              indicatorColor: Colors.white,
-              indicatorSize: TabBarIndicatorSize.tab,
-              tabs: const [
-                Tab(
-                  child: Text(
-                    'Booked',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                Tab(
-                  child: Text(
-                    'History',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                )
-              ]),
+          centerTitle: true,
           title: const Text(
-            'View Booking',
+            'My Booking',
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w600,
             ),
           ),
           backgroundColor: myappColor,
-          leading: const Padding(
-            padding: EdgeInsets.only(left: 4, bottom: 4),
-            child: CircleAvatar(
-              backgroundImage: AssetImage('assets/evcomp.jpg'),
-            ),
-          ),
         ),
         body: SingleChildScrollView(
-          child: tabBarPages[onTabbar],
+          child: Column(
+            children: List.generate(
+               provider. bookingList.length,
+                (index) => BookingCardTile(
+                      image:provider. bookingList[index].image,
+                      name:provider. bookingList[index].name,
+                      date:provider. bookingList[index].date,
+                      buttonText:provider. bookingList[index].buttontext,
+                    )),
+          ),
         ),
       ),
     );
   }
 }
 
-class BookedChargingStations extends StatelessWidget {
-  const BookedChargingStations({
+class BookingCardTile extends StatelessWidget {
+  const BookingCardTile({
     super.key,
+    required this.name,
+    required this.image,
+    required this.date,
+    required this.buttonText,
   });
+
+  final String name;
+  final String image;
+  final String date;
+  final String buttonText;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: List.generate(
-          3,
-          (index) => Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  // padding: const EdgeInsets.all(15),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade100,
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(
-                      color: myappColor,
-                      width: 4,
+ return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: const Color.fromARGB(255, 212, 212, 212),
+        ),
+        padding: const EdgeInsets.all(13),
+        child: Row(children: [
+          Container(
+            width: 90,
+            height: 90,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              image:
+                  DecorationImage(image: AssetImage(image), fit: BoxFit.cover),
+            ),
+          ),
+          Container(
+            width: 260,
+            // color: Colors.amber,
+            height: 90,
+            padding: const EdgeInsets.all(9),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      name,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        width: 170,
-                        height: 170,
-                        decoration: BoxDecoration(
-                          image: const DecorationImage(
-                              image: AssetImage('assets/charging.jpeg'),
-                              fit: BoxFit.cover),
-                          borderRadius: BorderRadius.circular(16),
+                    Text(date),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      '80.00',
+                      style: TextStyle(
+                        fontSize: 21,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Container(
+                      width: 100,
+                      height: 30,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(19),
+                          border: Border.all(
+                            width: 2,
+                            color: Colors.green,
+                          )),
+                      child: Center(
+                        child: Text(
+                          buttonText,
+                          style: TextStyle(
+                            color: Colors.green,
+                          ),
                         ),
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(
-                            width: 190,
-                            child: Text(
-                              'Vypin Charging stations',
-                              style: TextStyle(
-                                fontSize: 23,
-                                fontWeight: FontWeight.w600,
-                                color: myappColor,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
-                            ),
-                          ),
-                          const Row(
-                            children: [
-                              Text(
-                                '4.3',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.orangeAccent,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 2,
-                              ),
-                              Icon(
-                                Icons.star,
-                                color: Colors.orangeAccent,
-                              )
-                            ],
-                          ),
-                          const Row(
-                            children: [
-                              Text(
-                                'Time remaining :-2hr56min',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 7,
-                          ),
-                          Container(
-                            width: 180,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(123, 54, 179, 58),
-                              borderRadius: BorderRadius.circular(18),
-                              border: Border.all(
-                                width: 4,
-                                color: myappColor,
-                              ),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                'Cancel booking',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              )),
+              ],
+            ),
+          )
+        ]),
+      ),
     );
   }
 }

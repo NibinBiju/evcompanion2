@@ -1,6 +1,11 @@
 // ignore_for_file: unnecessary_new
 
 import 'package:evcompanion2/controller/add_vehicle_controller/add_vehicle_provider.dart';
+import 'package:evcompanion2/controller/bookstation_controller.dart';
+
+import 'package:evcompanion2/controller/ev_stations_service/ev_station_services.dart';
+import 'package:evcompanion2/controller/favorite_controller/f_controller.dart';
+import 'package:evcompanion2/presentation/view/homepage/filter.dart';
 import 'package:evcompanion2/utils/colorConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:evcompanion2/splash_screen/splash_screen.dart';
@@ -15,8 +20,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -25,6 +28,9 @@ class MyApp extends StatelessWidget {
         return MultiProvider(
           providers: [
             ChangeNotifierProvider(create: (context) => AddVehicleProvider()),
+            ChangeNotifierProvider(create: (context) => EvStationsServices()),
+            ChangeNotifierProvider(create: (context) => FavoriteController()),
+            ChangeNotifierProvider(create: (context) =>StationbookController())
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
@@ -36,7 +42,8 @@ class MyApp extends StatelessWidget {
                     foregroundColor:
                         Colors.black //here you can give the text color
                     )),
-            home: const SplashScreen(),
+            // home: const SplashScreen(),
+            home: SplashScreen(),
           ),
         );
       },

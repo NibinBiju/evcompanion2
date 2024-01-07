@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../login_screen/login_screen.dart';
+import '../presentation/view/login_screen/login_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter/services.dart';
 import 'package:evcompanion2/presentation/widgets/mytextfield.dart';
 import 'package:evcompanion2/presentation/widgets/customButtom.dart';
 
 class RegistrationPage extends StatefulWidget {
+  const RegistrationPage({super.key});
+
   @override
   State<RegistrationPage> createState() => _RegistrationPageState();
 }
@@ -27,82 +28,162 @@ class _RegistrationPageState extends State<RegistrationPage> {
         elevation: 0,
       ),
       body: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          child: Column(
-            children: [
-              // Image.asset('assets/icon1.png',  height: 100, width: 100, ),
-              Text(
-                "Sign up",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
-              ),
-              Text("Please enter the details below to continue"),
-
-              Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: myTextField(
-                      "Full name", "Full name", TextInputType.text, name_ctrl)),
-              Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: myTextField("Email address", "Email address",
-                      TextInputType.text, uname_ctrl)),
-
-              Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: myTextField("Phone number", "Phone number",
-                      TextInputType.number, phone_ctrl)),
-
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: TextField(
-                  // style: ItemNameStyle,
-                  controller: password_ctrl,
-                  obscureText: _obscureText,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: "password must be 6 character",
-                    // hintStyle: textHintStyle,
-                    labelText: 'Password',
-                    //labelStyle:  textStyle3,
-                    suffixIcon: _obscureText == true
-                        ? IconButton(
-                            onPressed: () {
-                              setState(() {
-                                _obscureText = false;
-                              });
-                            },
-                            icon: Icon(
-                              Icons.remove_red_eye,
-                              size: 20.w,
-                            ))
-                        : IconButton(
-                            onPressed: () {
-                              setState(() {
-                                _obscureText = true;
-                              });
-                            },
-                            icon: Icon(
-                              Icons.visibility_off,
-                              size: 20.w,
-                            )),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                // Image.asset('assets/icon1.png',  height: 100, width: 100, ),
+                const Text(
+                  "Sign up",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Text(
+                  "Please enter the details below to continue",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 16,
                   ),
                 ),
-              ),
-              customButton("Sign up", () => storedata()),
+                const SizedBox(
+                  height: 40,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            'Full name',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.grey.shade700,
+                            ),
+                          )
+                        ],
+                      ),
+                      myTextField("Full name", "Full name", TextInputType.text,
+                          name_ctrl),
+                    ],
+                  ),
+                ),
 
-              // style: const ButtonStyle(
-              // backgroundColor: MaterialStatePropertyAll<Color>(Colors.brown),
-              // ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            'Email address',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.grey.shade700,
+                            ),
+                          )
+                        ],
+                      ),
+                      myTextField("Email address", "Email address",
+                          TextInputType.text, uname_ctrl),
+                    ],
+                  ),
+                ),
 
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => RegistrationPage()));
-                },
-                child: Text("Do you have an account? Signin"),
-              )
-            ],
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            'Phone number',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.grey.shade700,
+                            ),
+                          )
+                        ],
+                      ),
+                      myTextField("Phone number", "Phone number",
+                          TextInputType.number, phone_ctrl),
+                    ],
+                  ),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            'Password',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.grey.shade700,
+                            ),
+                          )
+                        ],
+                      ),
+                      TextField(
+                        // style: ItemNameStyle,
+                        controller: password_ctrl,
+                        obscureText: _obscureText,
+                        decoration: InputDecoration(
+                          border: const OutlineInputBorder(),
+                          hintText: "password must be 6 character",
+                          // hintStyle: textHintStyle,
+                          labelText: 'Password',
+                          //labelStyle:  textStyle3,
+                          suffixIcon: _obscureText == true
+                              ? IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      _obscureText = false;
+                                    });
+                                  },
+                                  icon: Icon(
+                                    Icons.remove_red_eye,
+                                    size: 20.w,
+                                  ))
+                              : IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      _obscureText = true;
+                                    });
+                                  },
+                                  icon: Icon(
+                                    Icons.visibility_off,
+                                    size: 20.w,
+                                  ),
+                                ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+                customButton("Sign up", () => storedata()),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => const LoginScreen(),
+                      ),
+                    );
+                  },
+                  child: const Text("Do you have an account? Signin"),
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -121,6 +202,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
     Preferences.setString('passkey', password);
     Preferences.setString('phonekey', phone);
     Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => LoginScreen()));
+        .push(MaterialPageRoute(builder: (context) => const LoginScreen()));
   }
 }
