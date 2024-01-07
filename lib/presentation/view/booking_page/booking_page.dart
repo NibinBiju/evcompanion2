@@ -95,71 +95,71 @@ class _BookingPageState extends State<BookingPage> {
               const SizedBox(
                 height: 20,
               ),
-              const Text(
-                'Select time',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black,
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    width: 170,
-                    height: 90,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Starting time',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 16,
-                          ),
-                        ),
-                        TextField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  //ending time textfield
-                  Container(
-                    width: 170,
-                    height: 90,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Ending time',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 16,
-                          ),
-                        ),
-                        TextField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+              // const Text(
+              //   'Select time',
+              //   style: TextStyle(
+              //     fontSize: 20,
+              //     fontWeight: FontWeight.w600,
+              //     color: Colors.black,
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 20,
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     Container(
+              //       width: 170,
+              //       height: 90,
+              //       child: Column(
+              //         crossAxisAlignment: CrossAxisAlignment.start,
+              //         children: [
+              //           const Text(
+              //             'Starting time',
+              //             style: TextStyle(
+              //               color: Colors.grey,
+              //               fontWeight: FontWeight.w700,
+              //               fontSize: 16,
+              //             ),
+              //           ),
+              //           TextField(
+              //             decoration: InputDecoration(
+              //               border: OutlineInputBorder(
+              //                 borderRadius: BorderRadius.circular(20),
+              //               ),
+              //             ),
+              //           ),
+              //         ],
+              //       ),
+              //     ),
+              //     //ending time textfield
+              //     Container(
+              //       width: 170,
+              //       height: 90,
+              //       child: Column(
+              //         crossAxisAlignment: CrossAxisAlignment.start,
+              //         children: [
+              //           const Text(
+              //             'Ending time',
+              //             style: TextStyle(
+              //               color: Colors.grey,
+              //               fontWeight: FontWeight.w700,
+              //               fontSize: 16,
+              //             ),
+              //           ),
+              //           TextField(
+              //             decoration: InputDecoration(
+              //               border: OutlineInputBorder(
+              //                 borderRadius: BorderRadius.circular(20),
+              //               ),
+              //             ),
+              //           ),
+              //         ],
+              //       ),
+              //     ),
+              //   ],
+              // ),
               const SizedBox(
                 height: 20,
               ),

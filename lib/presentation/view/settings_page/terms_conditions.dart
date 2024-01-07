@@ -24,7 +24,7 @@ class Terms_Conditions extends StatelessWidget {
                 child: Text(
                   """1. Introduction
 
-Welcome to [Your App Name]! This Privacy Policy outlines our practices regarding the collection, use, and disclosure of information that we may collect through our EV charging app. By using our app, you agree to the terms outlined in this policy.
+Welcome to Ev Charging! This Privacy Policy outlines our practices regarding the collection, use, and disclosure of information that we may collect through our EV charging app. By using our app, you agree to the terms outlined in this policy.
 
 2. Information We Collect
 

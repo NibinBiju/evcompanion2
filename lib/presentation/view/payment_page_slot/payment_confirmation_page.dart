@@ -1,11 +1,39 @@
 // ignore_for_file: unnecessary_const
+import 'package:evcompanion2/controller/bookstation_controller.dart';
+import 'package:evcompanion2/model/my_booking_model/my_booking_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+// import 'package:provider/provider.dart';
 
-class PaymentConfirmationPage extends StatelessWidget {
-  const PaymentConfirmationPage({super.key});
+// import '../../../controller/bookstation_controller.dart';
+
+class PaymentConfirmationPage extends StatefulWidget {
+  static final List<PaymentConfirmationPage>bookingList=[];
+  const PaymentConfirmationPage({super.key,
+  //  required this.image,
+  //  required this.name,
+  //     required this.price,
+  //     required this.buttontext,required this.date
+  });
+//  final image;
+//   final name;
+//   final price;
+//   final buttontext;
+//   final date;
+
+  @override
+  State<PaymentConfirmationPage> createState() => _PaymentConfirmationPageState();
+}
+
+class _PaymentConfirmationPageState extends State<PaymentConfirmationPage> {
+  bool addtoList=false;
+   
+  // StationbookController stationbookController=StationbookController();
 
   @override
   Widget build(BuildContext context) {
+    // var addContro=Provider.of<StationbookController>(context);
+    var provider =Provider.of<StationbookController>(context,listen: false);
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
@@ -309,6 +337,8 @@ class PaymentConfirmationPage extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
+                     
+                        Provider.of<StationbookController>(context,listen: false).bookingList.add(MyBookingModel(image: 'assets/charging.jpeg', name: "dvis", price: "100", buttontext: "ffytfy", date: "23333333333333"));
                         _showDialog(context);
                       },
                       child: Container(
@@ -526,7 +556,10 @@ class PaymentConfirmationPage extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.popUntil(context, (route) => false);
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                    Navigator.pop(context);
                   },
                   child: Container(
                     width: 150,

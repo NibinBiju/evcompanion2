@@ -1,6 +1,7 @@
 // ignore_for_file: unnecessary_new
 
 import 'package:evcompanion2/controller/add_vehicle_controller/add_vehicle_provider.dart';
+import 'package:evcompanion2/controller/bookstation_controller.dart';
 
 import 'package:evcompanion2/controller/ev_stations_service/ev_station_services.dart';
 import 'package:evcompanion2/controller/favorite_controller/f_controller.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
             ChangeNotifierProvider(create: (context) => AddVehicleProvider()),
             ChangeNotifierProvider(create: (context) => EvStationsServices()),
             ChangeNotifierProvider(create: (context) => FavoriteController()),
-
+            ChangeNotifierProvider(create: (context) =>StationbookController())
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,

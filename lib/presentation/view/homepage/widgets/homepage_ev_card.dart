@@ -4,7 +4,7 @@ import 'package:evcompanion2/presentation/view/details_page/details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../booking_page/booking_page.dart';
-import '../../settings_page/my_favourite.dart';
+//import '../../settings_page/my_favourite.dart';
 
 class HomepageCard extends StatefulWidget {
    static final List<HomepageCard>favoritesList=[];
@@ -181,10 +181,11 @@ class _HomepageCardState extends State<HomepageCard> {
                     //view station button
                     InkWell(
                       onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return const DetailsPage();
-                        }));
+                        Navigator.push(context, MaterialPageRoute(
+                          builder: (context)=>DetailsPage(stationName: 
+                          widget.stationName,
+                          location: widget.location,
+                          )));
                       },
                       child: Container(
                         width: 140,

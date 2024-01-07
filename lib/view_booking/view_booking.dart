@@ -1,7 +1,7 @@
-import 'package:evcompanion2/model/my_booking_model/my_booking_model.dart';
+import 'package:evcompanion2/controller/bookstation_controller.dart';
 import 'package:evcompanion2/utils/colorConstants.dart';
-import 'package:evcompanion2/view_booking/history_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ViewBookingPage extends StatefulWidget {
   const ViewBookingPage({super.key});
@@ -11,20 +11,12 @@ class ViewBookingPage extends StatefulWidget {
 }
 
 class _ViewBookingPageState extends State<ViewBookingPage> {
- List<MyBookingModel> bookingList = [
-    MyBookingModel(
-      date: '20-12-2023',
-      image: 'assets/charging.jpeg',
-      name: 'Greena station',
-      price: '80.00',
-      buttontext: 'booked',
-    ),
-  ];
 
   int onTabbar = 0;
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<StationbookController>(context);
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -42,12 +34,12 @@ class _ViewBookingPageState extends State<ViewBookingPage> {
         body: SingleChildScrollView(
           child: Column(
             children: List.generate(
-                bookingList.length,
+               provider. bookingList.length,
                 (index) => BookingCardTile(
-                      image: bookingList[index].image,
-                      name: bookingList[index].name,
-                      date: bookingList[index].date,
-                      buttonText: bookingList[index].buttontext,
+                      image:provider. bookingList[index].image,
+                      name:provider. bookingList[index].name,
+                      date:provider. bookingList[index].date,
+                      buttonText:provider. bookingList[index].buttontext,
                     )),
           ),
         ),

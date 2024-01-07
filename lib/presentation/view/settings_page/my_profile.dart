@@ -1,7 +1,5 @@
-import 'package:evcompanion2/utils/colorConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/services.dart';
 import 'package:evcompanion2/presentation/view/settings_page/edit_profile.dart';
 
@@ -109,8 +107,7 @@ class _myProfileState extends State<myProfile> {
 
                           ],
                         ),
-                      ),
-                                     ),
+                     )                            ),
                    ],
                  ),
                 Row(

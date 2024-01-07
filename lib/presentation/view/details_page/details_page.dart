@@ -3,14 +3,22 @@ import 'package:evcompanion2/presentation/view/booking_page/booking_page.dart';
 import 'package:flutter/material.dart';
 
 class DetailsPage extends StatefulWidget {
-  const DetailsPage({super.key});
+  const DetailsPage({
+    Key? key,
+  required this.stationName,
+  required this.location
+  }):super(key: key);
+
+  final String stationName;
+  final String location;
 
   @override
   State<DetailsPage> createState() => _DetailsPageState();
 }
 
 class _DetailsPageState extends State<DetailsPage> {
-  List ofImages = ['assets/charging.jpeg', 'assets/tesla.jpg'];
+  List ofImages = ['assets/charging.jpeg',
+   'assets/tesla.jpg'];
   int pageNo = 1;
   int indexValue = 0;
   List ofCharges = [
@@ -40,7 +48,7 @@ class _DetailsPageState extends State<DetailsPage> {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(13),
                   border: Border.all(
-                    color: Colors.green,
+                    color: Colors.green,    //get direction button
                     width: 3,
                   ),
                 ),
@@ -206,11 +214,19 @@ class _DetailsPageState extends State<DetailsPage> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                'Greenspeed station',
+                               Text(
+                                widget.stationName,
+                                //'Greenspeed station',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 22,
+                                ),
+                              ),
+                              Text(
+                                widget.location,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20
                                 ),
                               ),
                               const SizedBox(
@@ -262,29 +278,30 @@ class _DetailsPageState extends State<DetailsPage> {
                                   ],
                                 ),
                               ),
-                              Container(
-                                padding: const EdgeInsets.all(8),
-                                child: const Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Address:',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 17,
-                                      ),
-                                    ),
-                                    Text(
-                                      '1901 Thormiridge,Hawai',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 17,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                              // Container(
+                              //   padding: const EdgeInsets.all(8),
+                              //   child: const Row(
+                              //     mainAxisAlignment:
+                              //         MainAxisAlignment.spaceBetween,
+                              //     children: [
+                              //       Text(
+                              //         "Address",
+                              //         style: TextStyle(
+                              //           fontWeight: FontWeight.w600,
+                              //           fontSize: 17,
+                              //         ),
+                              //       ),
+                              //       Text(
+                              //        // widget.location,
+                              //        "aaa",
+                              //         style: TextStyle(
+                              //           fontWeight: FontWeight.w600,
+                              //           fontSize: 17,
+                              //         ),
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ),
                             ],
                           ),
                         ),
@@ -301,7 +318,7 @@ class _DetailsPageState extends State<DetailsPage> {
                         scrollDirection: Axis.horizontal,
                         child: Row(
                           children: List.generate(
-                            2,
+                            3,
                             (index) => Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Container(
