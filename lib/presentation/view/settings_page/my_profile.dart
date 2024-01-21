@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter/services.dart';
 import 'package:evcompanion2/presentation/view/settings_page/edit_profile.dart';
 
 class myProfile extends StatefulWidget {
@@ -13,6 +12,7 @@ class _myProfileState extends State<myProfile> {
   String? tname;
   String? tuname;
   String? tphone;
+
   initState() {
     fetchData();
     super.initState();
@@ -33,7 +33,6 @@ class _myProfileState extends State<myProfile> {
       appBar: AppBar(
         elevation: 0,
         shadowColor: Colors.black,
-        
         title: Text(
           "My Profile",
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
@@ -41,11 +40,13 @@ class _myProfileState extends State<myProfile> {
         centerTitle: true,
         actions: [
           IconButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => EditProfile()));
-              },
-              icon: Icon(Icons.edit))
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => EditProfile()),
+              );
+            },
+            icon: Icon(Icons.edit),
+          ),
         ],
       ),
       body: Container(
@@ -59,9 +60,11 @@ class _myProfileState extends State<myProfile> {
                 CircleAvatar(
                   backgroundColor: Colors.grey,
                   radius: 50.0,
-                  child: Icon(Icons.person,
-                  size: 70,
-                  color: Colors.white,),
+                  child: Icon(
+                    Icons.person,
+                    size: 70,
+                    color: Colors.white,
+                  ),
                 ),
                 SizedBox(height: 20,),
                 Row(
@@ -70,69 +73,72 @@ class _myProfileState extends State<myProfile> {
                     Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Container(
-                        width:MediaQuery.of(context).size.width/1.2,
-                        padding: EdgeInsets.all(10.0), // Add padding here
+                        width: MediaQuery.of(context).size.width / 1.2,
+                        padding: EdgeInsets.all(10.0),
                         decoration: BoxDecoration(
-                          color: Colors.grey[200], // Set background color
-                          borderRadius: BorderRadius.circular(8.0), // Set border radius
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text("Name"),
-                            Text("$tname",style: TextStyle(fontSize: 20)),
+                            Text("$tname", style: TextStyle(fontSize: 20)),
                           ],
                         ),
                       ),
                     ),
                   ],
                 ),
-                 Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                   children: [
-                     Padding(
+                  children: [
+                    Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Container(
-                        width:MediaQuery.of(context).size.width/1.2,
-                        padding: EdgeInsets.all(10.0), // Add padding here
+                        width: MediaQuery.of(context).size.width / 1.2,
+                        padding: EdgeInsets.all(10.0),
                         decoration: BoxDecoration(
-                          color: Colors.grey[200], // Set background color
-                          borderRadius: BorderRadius.circular(8.0), // Set border radius
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text("Email"),
-                            Text("$tuname",style: TextStyle(fontSize: 20)),
-
+                            Text("$tuname", style: TextStyle(fontSize: 20)),
                           ],
                         ),
-                     )                            ),
-                   ],
-                 ),
+                      ),
+                    ),
+                  ],
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Container(
-                        width:MediaQuery.of(context).size.width/1.2,
-                        padding: EdgeInsets.all(10.0), // Add padding here
+                        width: MediaQuery.of(context).size.width / 1.2,
+                        padding: EdgeInsets.all(10.0),
                         decoration: BoxDecoration(
-                          color: Colors.grey[200], // Set background color
-                          borderRadius: BorderRadius.circular(8.0), // Set border radius
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text("Phone number"),
-                            Text("$tphone",style: TextStyle(fontSize: 20),)
+                            Text(
+                              "$tphone",
+                              style: TextStyle(fontSize: 20),
+                            ),
                           ],
                         ),
                       ),
                     ),
                   ],
-                )
+                ),
               ],
             ),
           ),

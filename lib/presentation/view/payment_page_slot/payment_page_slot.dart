@@ -2,7 +2,18 @@ import 'package:evcompanion2/presentation/view/payment_page_slot/payment_confirm
 import 'package:flutter/material.dart';
 
 class PaymentSlot extends StatefulWidget {
-  const PaymentSlot({super.key});
+  const PaymentSlot({super.key, required this.stationName,
+   required this.location, 
+  // required this.portName, 
+   required this.price, required this.duration, required this.date,
+  });
+  final String stationName;
+  final String location;
+  //final String portName;
+  final String price;
+  final String duration;
+  final String date;
+
 
   @override
   State<PaymentSlot> createState() => _PaymentSlotState();
@@ -84,10 +95,13 @@ class _PaymentSlotState extends State<PaymentSlot> {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return const PaymentConfirmationPage();
-                    },
-                  ),
-                );
+                      return PaymentConfirmationPage(name: widget.stationName,
+                      date: widget.date,
+                      price: widget.price,
+                      time: widget.duration,);
+                   },
+                 ),
+               );
               },
               child: Container(
                 width: double.infinity,

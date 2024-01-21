@@ -21,9 +21,9 @@ class _ProfileState extends State<Profile> {
     myProfile(),
     const MyVehicle(),
     const MyFavourites(),
-    const ViewBookingPage(),
+    ViewBookingPage(),
     Terms_Conditions(),
-    LoginScreen(),
+    LoginFire(),
   ];
   var iconName = [
     "profile",
@@ -82,7 +82,7 @@ class _ProfileState extends State<Profile> {
                 preferences.clear();
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => LoginScreen()),
+                  MaterialPageRoute(builder: (context) => LoginFire()),
                 );
               },
               child: const Text("Logout"),
@@ -102,9 +102,6 @@ class _ProfileState extends State<Profile> {
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35),
         ),
         centerTitle: true,
-        // leading: IconButton(onPressed: (){
-        //   Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Admin()));
-        // }, icon: Icon(Icons.admin_panel_settings,size: 40,)),
       ),
       body: SingleChildScrollView(
         child: Column(

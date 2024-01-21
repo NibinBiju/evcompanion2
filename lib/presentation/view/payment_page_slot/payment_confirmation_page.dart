@@ -3,23 +3,21 @@ import 'package:evcompanion2/controller/bookstation_controller.dart';
 import 'package:evcompanion2/model/my_booking_model/my_booking_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:provider/provider.dart';
-
 // import '../../../controller/bookstation_controller.dart';
 
 class PaymentConfirmationPage extends StatefulWidget {
   static final List<PaymentConfirmationPage>bookingList=[];
   const PaymentConfirmationPage({super.key,
-  //  required this.image,
-  //  required this.name,
-  //     required this.price,
-  //     required this.buttontext,required this.date
+   required this.name,
+      required this.price,
+      required this.date, required this.time
   });
-//  final image;
-//   final name;
-//   final price;
-//   final buttontext;
-//   final date;
+  final String name;
+  final String price;
+  final String date;
+  final String time;
 
   @override
   State<PaymentConfirmationPage> createState() => _PaymentConfirmationPageState();
@@ -27,9 +25,19 @@ class PaymentConfirmationPage extends StatefulWidget {
 
 class _PaymentConfirmationPageState extends State<PaymentConfirmationPage> {
   bool addtoList=false;
+  String storedusername="";
+   void getdata()async{
+     var Preferences =  await SharedPreferences.getInstance();
+   storedusername = Preferences.getString('unamekey') ?? '';
+   print(storedusername);
+   }
    
   // StationbookController stationbookController=StationbookController();
-
+    @override
+  void initState() {
+    super.initState();
+    getdata();
+  }
   @override
   Widget build(BuildContext context) {
     // var addContro=Provider.of<StationbookController>(context);
@@ -53,68 +61,6 @@ class _PaymentConfirmationPageState extends State<PaymentConfirmationPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Vehicle',
-                style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 23,
-                ),
-              ),
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.grey.shade400,
-                ),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 180,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade400,
-                        borderRadius: BorderRadius.circular(15),
-                        image: const DecorationImage(
-                          image: AssetImage('assets/tesla.jpg'),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    const SizedBox(
-                      width: 150,
-                      height: 100,
-                      child: const Row(
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Tesla',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 20,
-                                ),
-                              ),
-                              Text(
-                                'ModelS 40',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w300,
-                                  fontSize: 17,
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
               const Text(
                 'Charging station',
                 style: TextStyle(
@@ -145,16 +91,16 @@ class _PaymentConfirmationPageState extends State<PaymentConfirmationPage> {
                       ),
                     ),
                     Container(
-                      width: 200,
+                      width: 250,
                       padding: const EdgeInsets.all(10),
-                      child: const Row(
+                      child:  Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Greenspeed station',
+                                widget.name,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w700,
                                   color: Colors.black,
@@ -186,7 +132,7 @@ class _PaymentConfirmationPageState extends State<PaymentConfirmationPage> {
                   color: Colors.grey.shade400,
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: const Padding(
+                child:  Padding(
                   padding: EdgeInsets.all(15),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -202,7 +148,7 @@ class _PaymentConfirmationPageState extends State<PaymentConfirmationPage> {
                             ),
                           ),
                           Text(
-                            'Dec 17,2023',
+                            widget.date,
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 18,
@@ -246,7 +192,7 @@ class _PaymentConfirmationPageState extends State<PaymentConfirmationPage> {
                             ),
                           ),
                           Text(
-                            '1 Hour',
+                            widget.time,
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 18,
@@ -270,7 +216,7 @@ class _PaymentConfirmationPageState extends State<PaymentConfirmationPage> {
                 ),
                 child: Column(
                   children: [
-                    const Row(
+                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
@@ -281,7 +227,7 @@ class _PaymentConfirmationPageState extends State<PaymentConfirmationPage> {
                           ),
                         ),
                         Text(
-                          '15.00',
+                          widget.price,
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 18,
@@ -313,7 +259,7 @@ class _PaymentConfirmationPageState extends State<PaymentConfirmationPage> {
                       color: Colors.black,
                       height: 50,
                     ),
-                    const Row(
+                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
@@ -324,7 +270,7 @@ class _PaymentConfirmationPageState extends State<PaymentConfirmationPage> {
                           ),
                         ),
                         Text(
-                          '15.00',
+                          widget.price,
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 23,
@@ -338,7 +284,19 @@ class _PaymentConfirmationPageState extends State<PaymentConfirmationPage> {
                     InkWell(
                       onTap: () {
                      
-                        Provider.of<StationbookController>(context,listen: false).bookingList.add(MyBookingModel(image: 'assets/charging.jpeg', name: "dvis", price: "100", buttontext: "ffytfy", date: "23333333333333"));
+                        // Provider.of<StationbookController>(context,listen: false).bookingList.add(MyBookingModel(
+                        //   image: 'assets/charging.jpeg', name: widget.name,
+                        //    price: widget.price,
+                        //     buttontext: widget.time,
+                        //      date: widget.date,user: storedusername));
+                        provider.bookingList.add(MyBookingModel(
+            image: 'assets/charging.jpeg',
+            name: widget.name,
+            price: widget.price,
+            buttontext: widget.time,
+            date: widget.date,
+            user: storedusername,
+          ));
                         _showDialog(context);
                       },
                       child: Container(
@@ -407,7 +365,7 @@ class _PaymentConfirmationPageState extends State<PaymentConfirmationPage> {
                     Container(
                       width: 140,
                       height: 70,
-                      child: const Column(
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
@@ -418,7 +376,7 @@ class _PaymentConfirmationPageState extends State<PaymentConfirmationPage> {
                             ),
                           ),
                           Text(
-                            'Charging station',
+                            widget.name,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
@@ -430,7 +388,7 @@ class _PaymentConfirmationPageState extends State<PaymentConfirmationPage> {
                     Container(
                       width: 140,
                       height: 70,
-                      child: const Column(
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
@@ -441,7 +399,7 @@ class _PaymentConfirmationPageState extends State<PaymentConfirmationPage> {
                             ),
                           ),
                           Text(
-                            '1 hour',
+                            '${widget.time} hour',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
@@ -458,7 +416,7 @@ class _PaymentConfirmationPageState extends State<PaymentConfirmationPage> {
                     Container(
                       width: 140,
                       height: 70,
-                      child: const Column(
+                      child:  Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
@@ -469,7 +427,7 @@ class _PaymentConfirmationPageState extends State<PaymentConfirmationPage> {
                             ),
                           ),
                           Text(
-                            '21-10-2023',
+                            widget.date,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
@@ -481,7 +439,7 @@ class _PaymentConfirmationPageState extends State<PaymentConfirmationPage> {
                     Container(
                       width: 140,
                       height: 70,
-                      child: const Column(
+                      child:  Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
@@ -492,7 +450,7 @@ class _PaymentConfirmationPageState extends State<PaymentConfirmationPage> {
                             ),
                           ),
                           Text(
-                            '10:00',
+                            widget.time,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
@@ -506,33 +464,33 @@ class _PaymentConfirmationPageState extends State<PaymentConfirmationPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    // Container(
+                    //   width: 140,
+                    //   height: 70,
+                    //   child: const Column(
+                    //     crossAxisAlignment: CrossAxisAlignment.start,
+                    //     children: [
+                    //       Text(
+                    //         'Charging port',
+                    //         style: TextStyle(
+                    //           color: Colors.grey,
+                    //           fontWeight: FontWeight.w600,
+                    //         ),
+                    //       ),
+                    //       Text(
+                    //         'BS 1895',
+                    //         style: TextStyle(
+                    //           fontSize: 16,
+                    //           fontWeight: FontWeight.w600,
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                     Container(
                       width: 140,
                       height: 70,
-                      child: const Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Charging port',
-                            style: TextStyle(
-                              color: Colors.grey,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          Text(
-                            'BS 1895',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      width: 140,
-                      height: 70,
-                      child: const Column(
+                      child:  Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
@@ -543,7 +501,7 @@ class _PaymentConfirmationPageState extends State<PaymentConfirmationPage> {
                             ),
                           ),
                           Text(
-                            '30.00',
+                            widget.price,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,

@@ -227,45 +227,50 @@ class _HomepageState extends State<Homepage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Container(
-                                  width: 290,
-                                  height: 70,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: Colors.white,
-                                      boxShadow: const [
-                                        BoxShadow(
-                                          blurRadius: 2,
-                                          color: Colors.black,
-                                        ),
-                                        BoxShadow(
-                                          color: Colors.black,
-                                        ),
-                                        BoxShadow(
-                                          color: Colors.black,
-                                        ),
-                                      ]),
-                                  child: Center(
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                        left: 20,
-                                      ),
-                                      child: TextField(
-                                        controller: searchController,
-                                        onChanged: (value) {
-                                          if (value.isNotEmpty) {
-                                            searchPlaces();
-                                          }
-                                        },
-                                        style: const TextStyle(
-                                          fontSize: 25,
-                                          color: myappColor,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                        decoration: const InputDecoration(
-                                          hintText: 'search',
-                                          isDense: false,
-                                          border: InputBorder.none,
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 10),
+                                    child: Container(
+                                      // width: 290,
+                                      height: 70,
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(20),
+                                          color: Colors.white,
+                                          boxShadow: const [
+                                            BoxShadow(
+                                              blurRadius: 2,
+                                              color: Colors.black,
+                                            ),
+                                            BoxShadow(
+                                              color: Colors.black,
+                                            ),
+                                            BoxShadow(
+                                              color: Colors.black,
+                                            ),
+                                          ]),
+                                      child: Center(
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                            left: 20,
+                                          ),
+                                          child: TextField(
+                                            controller: searchController,
+                                            onChanged: (value) {
+                                              if (value.isNotEmpty) {
+                                                searchPlaces();
+                                              }
+                                            },
+                                            style: const TextStyle(
+                                              fontSize: 25,
+                                              color: myappColor,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                            decoration: const InputDecoration(
+                                              hintText: 'search',
+                                              isDense: false,
+                                              border: InputBorder.none,
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ),

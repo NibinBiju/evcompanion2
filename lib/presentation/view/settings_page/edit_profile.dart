@@ -61,10 +61,10 @@ class _EditProfileState extends State<EditProfile> {
                   padding: const EdgeInsets.all(12.0),
                   child: myTextField(
                       "Full name", "Full name", TextInputType.text, name_ctrl)),
-              Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: myTextField("Email address", "Email address",
-                      TextInputType.text, uname_ctrl)),
+              // Padding(
+              //     padding: const EdgeInsets.all(12.0),
+              //     child: myTextField("Email address", "Email address",
+              //         TextInputType.text, uname_ctrl)),
 
               Padding(
                   padding: const EdgeInsets.all(12.0),

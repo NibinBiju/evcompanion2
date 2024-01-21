@@ -9,43 +9,34 @@ class EvStationsServices with ChangeNotifier {
       "longitude": 76.3110,
       "chargingType": {
         "name": "Level 2",
-        "description": "Standard AC Charging"
+        "description": "Standard AC Charging",
+        "simage": "assets/station1.jpg"
       },
       "chargingPlugs": [
         {
           "name": "GB/T",
           "status": "Available",
           "capacity": "50 kW",
-          "image": "assets/gb_t.png"
+          "image": "assets/ms1548-removebg-preview.png",
+          "acType": "AC Type 2"
         },
         {
           "name": "CC COMBO TYPE 2",
           "status": "Occupied",
           "capacity": "50 kW",
-          "image": "assets/ccs combo type 2.png"
-        },
-        {
-          "name": "Plug C",
-          "status": "Available",
-          "capacity": "50 kW",
-          "image": "assets/ccs combo type 1.png"
-        },
-        {
-          "name": "CHADEMO",
-          "status": "Under Maintenance",
-          "capacity": "50 kW",
-          "image": "assets/chademo.png"
+          "image": "assets/BS1000-removebg-preview.png",
+          "acType": "AC Type 2"
         }
       ],
       "amenities": [
-        {"name": "Restroom", "image": "https://example.com/restroom.jpg"},
-        {"name": "Wi-Fi", "image": "https://example.com/wifi.jpg"},
-        {"name": "Cafeteria", "image": "https://example.com/cafeteria.jpg"}
+        {"name": "Restroom", "image": "assets/restroom.png"},
+        {"name": "Wi-Fi", "image": "assets/wifi.png"},
+        {"name": "Cafeteria", "image": "assets/lodging.png"}
       ],
       "parkingFee": 5.00,
       "costPerHour": 2.50,
       "address": "123 Main Street, Kochi City",
-      "image": "https://example.com/powercharge_station_1.jpg"
+      "image": "assets/chuttersnap-xJLsHl0hIik-unsplash.jpg"
     },
     {
       "stationName": "GreenDrive Hub 2",
@@ -54,60 +45,67 @@ class EvStationsServices with ChangeNotifier {
       "longitude": 76.3181,
       "chargingType": {
         "name": "DC Fast Charging",
-        "description": "Direct Current Fast Charging"
+        "description": "Direct Current Fast Charging",
+        "simage": "assets/station2.jpeg"
       },
       "chargingPlugs": [
         {
           "name": "CC COMBO TYPE 2",
           "status": "Available",
           "capacity": "150 kW",
-          "image": "assets/ccs combo type 2.png"
+          "image": "assets/BS1000-removebg-preview.png",
+          "acType": "AC Type 2"
         },
         {
           "name": "GB/T",
           "status": "Available",
           "capacity": "150 kW",
-          "image": "assets/gb_t.png"
+          "image": "assets/ms1548-removebg-preview.png",
+          "acType": "AC Type 2"
         }
       ],
       "amenities": [
-        {"name": "Restroom", "image": "https://example.com/restroom.jpg"},
-        {"name": "Lounge", "image": "https://example.com/lounge.jpg"}
+        {"name": "Restroom", "image": "assets/restroom.png"},
+        {"name": "Park", "image": "assets/park.png"}
       ],
       "parkingFee": 3.50,
       "costPerHour": 1.75,
       "address": "456 Suburb Street, Kochi Suburb",
-      "image": "https://example.com/greendrive_hub_2.jpg"
+      "image": "assets/alex-re8FigEQ4eQ-unsplash.jpg"
     },
     {
       "stationName": "EcoPower Center 3",
       "location": "Kochi Downtown",
       "latitude": 9.9312,
       "longitude": 76.2673,
-      "chargingType": {"name": "Level 3", "description": "DC Fast Charging"},
+      "chargingType": {"name": "Level 3", "description": "DC Fast Charging",
+      "simage": "assets/station3.jpg"
+      },
       "chargingPlugs": [
         {
-          "name": "GB/T",
+          "name": "BS1254 Type",
           "status": "Available",
           "capacity": "150 kW",
-          "image": "assets/gb_t.png"
+          "image": "assets/BS1254-removebg-preview.png",
+          "acType": "AC Type 2"
         },
         {
           "name": "CC COMBO TYPE 2",
           "status": "Occupied",
           "capacity": "50 kW",
-          "image": "assets/ccs combo type 2.png"
+          "image": "assets/BS1000-removebg-preview.png",
+          "acType": "AC Type 2"
         }
       ],
       "amenities": [
-        {"name": "Restroom", "image": "https://example.com/restroom.jpg"},
-        {"name": "Workstation", "image": "https://example.com/workstation.jpg"},
-        {"name": "Cafeteria", "image": "https://example.com/cafeteria.jpg"}
+        {"name": "Restroom", "image": "assets/restroom.png"},
+        {"name": "Gym", "image": "assets/gym.png"},
+        {"name": "Cafeteria", "image": "assets/lodging.png"}
       ],
       "parkingFee": 4.00,
       "costPerHour": 2.00,
       "address": "789 Downtown Avenue, Kochi Downtown",
-      "image": "https://example.com/ecopower_center_3.jpg"
+      "image": "assets/stephen-mease-5hbzWe6ens4-unsplash.jpg"
     },
     {
       "stationName": "CleanCharge Plaza 4",
@@ -116,49 +114,34 @@ class EvStationsServices with ChangeNotifier {
       "longitude": 76.2422,
       "chargingType": {
         "name": "Level 2",
-        "description": "Standard AC Charging"
+        "description": "Standard AC Charging",
+        "simage": "assets/station4.jpg"
       },
       "chargingPlugs": [
         {
           "name": "Type 2 Mennekes",
           "status": "Available",
           "capacity": "50 kW",
-          "image": "assets/type 2 mennekes.png"
+          "image": "assets/bs1054-removebg-preview.png",
+          "acType": "AC Type 2"
         },
         {
-          "name": "CC COMBO TYPE 2",
+          "name": "BS1655 Type",
           "status": "Occupied",
           "capacity": "50 kW",
-          "image": "assets/ccs combo type 2.png"
-        },
-        {
-          "name": "CC COMBO TYPE 2",
-          "status": "Occupied",
-          "capacity": "50 kW",
-          "image": "assets/ccs combo type 2.png"
-        },
-        {
-          "name": "Plug C",
-          "status": "Available",
-          "capacity": "50 kW",
-          "image": "assets/ccs combo type 1.png"
-        },
-        {
-          "name": "CHADEMO",
-          "status": "Under Maintenance",
-          "capacity": "50 kW",
-          "image": "assets/chademo.png"
+          "image": "assets/BS1655-removebg-preview.png",
+          "acType": "AC Type 2"
         }
       ],
       "amenities": [
-        {"name": "Restroom", "image": "https://example.com/restroom.jpg"},
-        {"name": "Wi-Fi", "image": "https://example.com/wifi.jpg"},
-        {"name": "Lounge", "image": "https://example.com/lounge.jpg"}
+        {"name": "Restroom", "image": "assets/restroom.png"},
+        {"name": "Wi-Fi", "image": "assets/wifi.png"},
+        {"name": "Park", "image": "assets/park.png"}
       ],
       "parkingFee": 6.50,
       "costPerHour": 3.25,
       "address": "101 Port Street, Kochi Port Area",
-      "image": "https://example.com/cleancharge_plaza_4.jpg"
+      "image": "assets/maxim-hopman-lcysD7F8ycc-unsplash.jpg"
     },
     {
       "stationName": "SolarSpark Station 5",
@@ -167,32 +150,34 @@ class EvStationsServices with ChangeNotifier {
       "longitude": 76.2179,
       "chargingType": {
         "name": "DC Fast Charging",
-        "description": "Direct Current Fast Charging"
+        "description": "Direct Current Fast Charging",
+        "simage": "assets/station5.jpg"
       },
       "chargingPlugs": [
         {
-          "name": "Plug A",
+          "name": "BS1845 Type",
           "status": "Available",
           "capacity": "150 kW",
-          "image": "https://example.com/plug_a.jpg"
+          "image": "assets/bs1845-removebg-preview.png",
+          "acType": "AC Type 2"
         },
         {
-          "name": "Plug B",
+          "name": "BS1854 Type",
           "status": "Operational",
           "capacity": "150 kW",
-          "image": "https://example.com/plug_b.jpg"
+          "image": "assets/BS1854-removebg-preview.png",
+          "acType": "AC Type 2"
         }
       ],
       "amenities": [
-        {"name": "Restroom", "image": "https://example.com/restroom.jpg"},
-        {"name": "Cafeteria", "image": "https://example.com/cafeteria.jpg"}
+        {"name": "Restroom", "image": "assets/restroom.png"},
+        {"name": "Cafeteria", "image": "assets/lodging.png"}
+
       ],
       "parkingFee": 5.00,
       "costPerHour": 2.50,
       "address": "202 Industrial Road, Kochi Industrial Zone",
-      "image": "https://example.com/solarspark_station_5.jpg"
+      "image": "assets/rick-govic-rLTjEVGXNBA-unsplash.jpg"
     }
   ];
-
-  
 }

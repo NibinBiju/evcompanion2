@@ -1,79 +1,108 @@
-import 'dart:typed_data';
-import 'package:evcompanion2/presentation/view/settings_page/greenspeed_station.dart';
-import 'package:flutter/material.dart';
-import 'package:mobile_scanner/mobile_scanner.dart';
+// ignore_for_file: deprecated_member_use
 
-class Battery extends StatelessWidget {
-  const Battery({super.key});
+import 'package:url_launcher/url_launcher.dart';
+import 'package:ai_barcode_scanner/ai_barcode_scanner.dart';
+import 'package:flutter/material.dart';
+
+class Battery extends StatefulWidget {
+  Battery({Key? key});
+
+  @override
+  State<Battery> createState() => _BatteryState();
+}
+
+class _BatteryState extends State<Battery> {
+  MobileScannerController cameraController = MobileScannerController();
+  String scannedUrl = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('QR code', style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold)),
-      centerTitle: true,
-      ),
-    
-      body: Column(
-       // mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(height: 20,),
-          Text("Scan the QR code of the Charger to start charging",
-          style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
-          SizedBox(height: 30,),
-          Container(
-            width: 200,
-            height: 200,
-            color: Colors.black,
-            child: MobileScanner(
-              onDetect: (capture) {
-                final List<Barcode> barcodes = capture.barcodes;
-                final Uint8List? image = capture.image;
-                for (final barcode in barcodes) {
-                  debugPrint('Barcode found! ${barcode.rawValue}');
+      appBar: AppBar(
+        title: const Text('Mobile Scanner'),
+        actions: [
+          IconButton(
+            color: Colors.white,
+            icon: ValueListenableBuilder(
+              valueListenable: cameraController.torchState,
+              builder: (context, state, child) {
+                switch (state as TorchState) {
+                  case TorchState.off:
+                    return const Icon(Icons.flash_off, color: Colors.grey);
+                  case TorchState.on:
+                    return const Icon(Icons.flash_on, color: Colors.green);
                 }
               },
             ),
-            
+            iconSize: 32.0,
+            onPressed: () => cameraController.toggleTorch(),
           ),
-          SizedBox(height: 20,),
-          Divider(),
-          SizedBox(height: 20,),
-          Text("Enter charger id", style: TextStyle(fontSize: 20,
-          fontWeight: FontWeight.bold,color: Colors.grey)),
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: TextField(
-              decoration: InputDecoration(hintText: "Enter charger ",
-              border: OutlineInputBorder()),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: InkWell(
-              onTap: (){
-                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Greenspeed()));
+          IconButton(
+            color: Colors.white,
+            icon: ValueListenableBuilder(
+              valueListenable: cameraController.cameraFacingState,
+              builder: (context, state, child) {
+                switch (state as CameraFacing) {
+                  case CameraFacing.front:
+                    return const Icon(Icons.camera_front);
+                  case CameraFacing.back:
+                    return const Icon(Icons.camera_rear);
+                }
               },
-              child: Container(
-                width: 400,
-                height: 50,
-                decoration: BoxDecoration(
-                  color: Colors.green,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Center(
-                  child: Text("Proceed",
-                  
-                  style: TextStyle(
-                    fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white,
-                  ),
-                  ),
+            ),
+            iconSize: 32.0,
+            onPressed: () => cameraController.switchCamera(),
+          ),
+        ],
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              height: 300,
+              width: 300,
+              child: MobileScanner(
+                fit: BoxFit.contain,
+                controller: cameraController,
+                onDetect: (capture) {
+                  final List<Barcode> barcodes = capture.barcodes;
+                  for (final barcode in barcodes) {
+                    if (barcode.rawValue != null) {
+                      debugPrint('Barcode found! ${barcode.rawValue}');
+                      setState(() {
+                        
+                        scannedUrl = barcode.rawValue!;
+                      });
+                      _launchURL(scannedUrl);
+                    }
+                  }
+                },
+              ),
+            ),
+            SizedBox(height: 20),
+            GestureDetector(
+              onTap: (
+                
+              ) => _launchURL(scannedUrl),
+              child: Center(
+                child: Text(
+                  'Scanned URL: $scannedUrl',
+                  style: TextStyle(fontSize: 18, color: Colors.blue),
                 ),
               ),
             ),
-          )
-        ],
+          ],
+        ),
       ),
     );
   }
+
+  Future<void> _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
+}

@@ -32,7 +32,11 @@ class _MapViewState extends State<MapView> {
             return HomepageCard(
               stationName: data['stationName'],
               location: data['location'],
-              portName: data['chargingPlugs'][0]['name'],
+              portName: data['chargingPlugs'],
+              index: index,
+              amenities: data['amenities'],
+              pricePerHr: data['costPerHour'].toString(),
+               image: data['image'],
 
             );
           },

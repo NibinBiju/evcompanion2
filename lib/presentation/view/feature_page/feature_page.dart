@@ -53,7 +53,7 @@ class _FeaturePageState extends State<FeaturePage> {
                     onTap: () {
                       Navigator.pushReplacement(context,
                           MaterialPageRoute(builder: (context) {
-                        return LoginScreen();
+                        return LoginFire();
                       }));
                     },
                     child: Container(
@@ -75,7 +75,7 @@ class _FeaturePageState extends State<FeaturePage> {
                     onlastPage
                         ? Navigator.pushReplacement(context,
                             MaterialPageRoute(builder: (context) {
-                            return LoginScreen();
+                            return LoginFire();
                           }))
                         : _pageController.nextPage(
                             duration: const Duration(milliseconds: 400),

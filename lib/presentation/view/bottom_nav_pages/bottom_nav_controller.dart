@@ -16,8 +16,8 @@ class BottomNavController extends StatefulWidget {
 class _BottomNavControllerState extends State<BottomNavController> {
   final _pages = [
     const Homepage(),
-    const Battery(),
-    const ViewBookingPage(),
+     Battery(),
+    ViewBookingPage(),
     const Profile(),
   ];
   var _currentIndex = 0;

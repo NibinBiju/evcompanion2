@@ -7,28 +7,35 @@ import '../../booking_page/booking_page.dart';
 //import '../../settings_page/my_favourite.dart';
 
 class HomepageCard extends StatefulWidget {
-   static final List<HomepageCard>favoritesList=[];
+  static final List<HomepageCard> favoritesList = [];
   const HomepageCard({
     super.key,
-    required this.stationName, required this.location, required this.portName,
+    required this.stationName,
+    required this.location,
+    required this.portName,
+    required this.index,
+    required this.amenities, required this.pricePerHr, required this.image,
   });
 
   final String stationName;
   final String location;
-  final String portName;
+final String  pricePerHr;
+  final List<Map<String, dynamic>> portName;
+  final int index;
+  final List<Map<String, dynamic>> amenities;
+  final String image;
 
   @override
   State<HomepageCard> createState() => _HomepageCardState();
 }
 
 class _HomepageCardState extends State<HomepageCard> {
-  bool addtoFavorite=false;
-  FavoriteController favoriteController=FavoriteController();
+  bool addtoFavorite = false;
+  FavoriteController favoriteController = FavoriteController();
 
-  
   @override
   Widget build(BuildContext context) {
-    var favContro=Provider.of<FavoriteController>(context);
+    var favContro = Provider.of<FavoriteController>(context);
 
     return Card(
       elevation: 10,
@@ -43,7 +50,7 @@ class _HomepageCardState extends State<HomepageCard> {
         decoration: const BoxDecoration(
           color: Colors.white,
         ),
-        width: 350,
+        width: 380,
         child: Stack(
           children: [
             Column(
@@ -53,18 +60,18 @@ class _HomepageCardState extends State<HomepageCard> {
                   children: [
                     Text(
                       widget.stationName,
-                      style:const TextStyle(
+                      style: const TextStyle(
                         fontSize: 21,
                         fontWeight: FontWeight.w600,
                       ),
                     )
                   ],
                 ),
-                 Row(
+                Row(
                   children: [
                     Text(
                       widget.location,
-                      style:const TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                       ),
@@ -73,104 +80,59 @@ class _HomepageCardState extends State<HomepageCard> {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    //container inside card 1
-                    Container(
-                      width: 144,
-                      height: 110,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(17),
-                        color: const Color.fromARGB(255, 233, 229, 229),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ListTile(
-                            leading: SizedBox(
-                              width: 30,
-                              height: 40,
-                              child:
-                                  Image.asset('assets/fast_charging_port.png'),
-                            ),
-                            title:  Text(
-                              widget.portName,
-                              style: TextStyle(
-                                fontSize: 11,
-                                fontWeight: FontWeight.w600,
+                  children: List.generate(widget.portName.length, (index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(1.0),
+                      child: Container(
+                        width: 130,
+                        height: 110,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(17),
+                          color: const Color.fromARGB(255, 233, 229, 229),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ListTile(
+                              leading: SizedBox(
+                                width: 30,
+                                height: 40,
+                                child:
+                                    Image.asset(widget.portName[index]['image']),
                               ),
-                            ),
-                            subtitle: const Text(
-                              'AC type 2',
-                              style: TextStyle(
-                                fontSize: 11,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                          const Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Capacity:- BOKW',
-                                style: TextStyle(
-                                  fontSize: 14,
+                              title: Text(
+                                widget.portName[index]['name'],
+                                style: const TextStyle(
+                                  fontSize: 11,
                                   fontWeight: FontWeight.w600,
                                 ),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-
-                    //container inside card 2
-                    Container(
-                      width: 140,
-                      height: 110,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(17),
-                        color: const Color.fromARGB(255, 233, 229, 229),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ListTile(
-                            leading: SizedBox(
-                              width: 30,
-                              height: 40,
-                              child: Image.asset('assets/ordinary_plug.png'),
-                            ),
-                            title: const Text(
-                              'Charger B',
-                              style: TextStyle(
-                                fontSize: 11,
-                                fontWeight: FontWeight.w600,
+                                maxLines: 2,
                               ),
-                            ),
-                            subtitle: const Text(
-                              'CSS 2',
-                              style: TextStyle(
-                                fontSize: 11,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                          const Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Capacity:- BOKW',
-                                style: TextStyle(
-                                  fontSize: 14,
+                              subtitle: Text(
+                                widget.portName[index]['acType'].toString(),
+                                style: const TextStyle(
+                                  fontSize: 11,
                                   fontWeight: FontWeight.w600,
                                 ),
-                              )
-                            ],
-                          )
-                        ],
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Capacity:- ${widget.portName[index]['capacity']}',
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    );
+                  }),
                 ),
                 const SizedBox(
                   height: 10,
@@ -181,26 +143,39 @@ class _HomepageCardState extends State<HomepageCard> {
                     //view station button
                     InkWell(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(
-                          builder: (context)=>DetailsPage(stationName: 
-                          widget.stationName,
-                          location: widget.location,
-                          )));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DetailsPage(
+                                      stationName: widget.stationName,
+                                      location: widget.location,
+                                      amenities: widget.amenities,
+                                      pricePerHr:widget.pricePerHr,
+                                       portName: 'abc',
+                                        image: widget.image,
+                                       
+                                      
+                                    )));
                       },
-                      child: Container(
-                        width: 140,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(13),
-                          border: Border.all(
-                            color: Colors.green,
-                          ),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'View station',
-                            style: TextStyle(
+                      child: Expanded(
+                        child: Container(
+                          // width: 140,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(13),
+                            border: Border.all(
                               color: Colors.green,
+                            ),
+                          ),
+                          child: const Center(
+                            child: Padding(
+                              padding: EdgeInsets.all(10.0),
+                              child: Text(
+                                'View station',
+                                style: TextStyle(
+                                  color: Colors.green,
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -212,21 +187,30 @@ class _HomepageCardState extends State<HomepageCard> {
                       onTap: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return const BookingPage();
+                          return BookingPage(
+                            location: widget.location,
+                            stationName: widget.stationName,
+                             //portName: widget.portName[widget.index]['name'],
+                          );
                         }));
                       },
-                      child: Container(
-                        width: 140,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(13),
-                          color: Colors.green,
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'Book charge',
-                            style: TextStyle(
-                              color: Colors.white,
+                      child: Expanded(
+                        child: Container(
+                          // width: 140,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(13),
+                            color: Colors.green,
+                          ),
+                          child: const Center(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text(
+                                'Book charge',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -243,18 +227,20 @@ class _HomepageCardState extends State<HomepageCard> {
               children: [
                 IconButton(
                     onPressed: () {
-if(favContro.favoriteList.any((element) => element.stationName==widget.stationName)){
-    return;
-}else{
-favContro.addToFav(FavoriteModel(stationName: widget.stationName, location:widget.location));
-}
-                     
+                      if (favContro.favoriteList.any((element) =>
+                          element.stationName == widget.stationName)) {
+                        return;
+                      } else {
+                        favContro.addToFav(FavoriteModel(
+                            stationName: widget.stationName,
+                            location: widget.location));
+                      }
                     },
-                    icon:  Icon(
-                      // Icons.favorite_outline,
-                      // color: Colors.green,
-                      addtoFavorite? Icons.favorite:Icons.favorite_outline,
-                      color: addtoFavorite?Colors.green:Colors.green,
+                    icon: Icon(
+                      Icons.favorite,
+                      color: favContro.favoriteList.any(
+                        (element) => element.stationName==widget.stationName)
+                        ?Colors.green:const Color.fromARGB(255, 226, 226, 226)
                     )),
               ],
             )

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "674902114879",
+    "project_id": "project-ev-c127e",
+    "storage_bucket": "project-ev-c127e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:674902114879:android:af9826fb3f99f133ddae8a",
+        "android_client_info": {
+          "package_name": "com.example.evcompanion2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXqCyWphYZdb2uXAbL9-FTyKSSoJsD_e4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

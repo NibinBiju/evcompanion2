@@ -6,25 +6,36 @@ class DetailsPage extends StatefulWidget {
   const DetailsPage({
     Key? key,
   required this.stationName,
-  required this.location
+  required this.location,
+  required this.amenities,
+  required this.pricePerHr,
+  required this.portName,
+  required this.image, 
   }):super(key: key);
 
   final String stationName;
   final String location;
+  final List<Map<String,dynamic>> amenities;
+  final String pricePerHr;
+  final String portName;
+  final String image;
+
+
 
   @override
   State<DetailsPage> createState() => _DetailsPageState();
 }
 
 class _DetailsPageState extends State<DetailsPage> {
-  List ofImages = ['assets/charging.jpeg',
+  List ofImages = 
+  ['assets/charging.jpeg',
    'assets/tesla.jpg'];
   int pageNo = 1;
   int indexValue = 0;
-  List ofCharges = [
-    ['assets/ordinary_plug.png', 'BS 18548', 'Available'],
-    ['assets/fast_charging_port.png', 'AS 28643', 'Not Available'],
-  ];
+  // List ofCharges = [
+  //   ['assets/ordinary_plug.png', 'BS 18548', 'Available'],
+  //   ['assets/fast_charging_port.png', 'AS 28643', 'Not Available'],
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +81,12 @@ class _DetailsPageState extends State<DetailsPage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const BookingPage(),
+                    builder: (context) =>  BookingPage(
+                      stationName: widget.stationName,
+                      location: widget.location,
+                      //portName: 'abc',
+                      
+                    ),
                   ),
                 );
               },
@@ -143,10 +159,10 @@ class _DetailsPageState extends State<DetailsPage> {
                                   child: Icon(Icons.arrow_back_ios_new_rounded),
                                 ),
                               ),
-                              const CircleAvatar(
-                                backgroundColor: Colors.white,
-                                child: Icon(Icons.favorite_border_outlined),
-                              ),
+                              // const CircleAvatar(
+                              //   backgroundColor: Colors.white,
+                              //   child: Icon(Icons.favorite_border_outlined),
+                              // ),
                             ],
                           ),
                         ),
@@ -217,14 +233,14 @@ class _DetailsPageState extends State<DetailsPage> {
                                Text(
                                 widget.stationName,
                                 //'Greenspeed station',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 22,
                                 ),
                               ),
                               Text(
                                 widget.location,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20
                                 ),
@@ -234,11 +250,11 @@ class _DetailsPageState extends State<DetailsPage> {
                               ),
                               Container(
                                 padding: const EdgeInsets.all(8),
-                                child: const Row(
+                                child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'Cost:',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w600,
@@ -246,8 +262,8 @@ class _DetailsPageState extends State<DetailsPage> {
                                       ),
                                     ),
                                     Text(
-                                      '15.00/hour',
-                                      style: TextStyle(
+                                      '${widget.pricePerHr}/hour',
+                                      style: const TextStyle(
                                         fontWeight: FontWeight.w600,
                                         fontSize: 17,
                                       ),
@@ -318,7 +334,7 @@ class _DetailsPageState extends State<DetailsPage> {
                         scrollDirection: Axis.horizontal,
                         child: Row(
                           children: List.generate(
-                            3,
+                            widget.amenities.length,
                             (index) => Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Container(
@@ -328,6 +344,9 @@ class _DetailsPageState extends State<DetailsPage> {
                                   color:
                                       const Color.fromARGB(255, 224, 224, 224),
                                   borderRadius: BorderRadius.circular(18),
+                                ),
+                                child: Center(
+                                  child: Text(widget.amenities[index]['name']),
                                 ),
                               ),
                             ),
@@ -345,7 +364,7 @@ class _DetailsPageState extends State<DetailsPage> {
                       ),
                       Column(
                         children: List.generate(
-                          ofCharges.length,
+                          2,
                           (index) {
                             return Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -362,20 +381,21 @@ class _DetailsPageState extends State<DetailsPage> {
                                     height: 70,
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
-                                        image: AssetImage(
-                                          ofCharges[index][0],
+                                        image: 
+                                        AssetImage(
+                                          "assets/station1.jpg"
                                         ),
                                       ),
                                     ),
                                   ),
                                   title: Text(
-                                    ofCharges[index][1],
+                                    widget.portName,
                                     style: const TextStyle(
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                   subtitle: Text(
-                                    ofCharges[index][2],
+                                    "",
                                     style: const TextStyle(
                                       color: Colors.green,
                                     ),

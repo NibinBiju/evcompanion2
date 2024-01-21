@@ -1,11 +1,20 @@
 // ignore_for_file: sized_box_for_whitespace
 import 'package:evcompanion2/presentation/view/payment_page_slot/payment_page_slot.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class BookingPage extends StatefulWidget {
-  const BookingPage({super.key});
+  const BookingPage({Key? key,
+  required this.stationName,
+  required this.location,
+  // required this.portName
+  }):super(key: key);
+
+  final String stationName;
+  final String location;
+  // final String portName;
 
   @override
   State<BookingPage> createState() => _BookingPageState();
@@ -13,6 +22,7 @@ class BookingPage extends StatefulWidget {
 
 class _BookingPageState extends State<BookingPage> {
   double _sliderValue = 1.0;
+ DateTime _selectedDate = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,6 +77,7 @@ class _BookingPageState extends State<BookingPage> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: SfDateRangePicker(
+                    onSelectionChanged: _onSelectionChanged,
                     selectionTextStyle: const TextStyle(
                       fontSize: 18,
                     ),
@@ -237,7 +248,13 @@ class _BookingPageState extends State<BookingPage> {
               GestureDetector(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return PaymentSlot();
+                    return PaymentSlot(stationName: widget.stationName,
+                    duration: _sliderValue.round().toString(),
+                    location: widget.location,
+                    // portName: widget.portName,
+                    price: '${_sliderValue.round() * 150}',
+                    date: DateFormat('yyyy-MM-dd').format(_selectedDate),
+                    );
                   }));
                 },
                 child: Container(
@@ -262,5 +279,25 @@ class _BookingPageState extends State<BookingPage> {
         ),
       ),
     );
+  }
+  void _onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
+    /// The argument value will return the changed date as [DateTime] when the
+    /// widget [SfDateRangeSelectionMode] set as single.
+    ///
+    /// The argument value will return the changed dates as [List<DateTime>]
+    /// when the widget [SfDateRangeSelectionMode] set as multiple.
+    ///
+    /// The argument value will return the changed range as [PickerDateRange]
+    /// when the widget [SfDateRangeSelectionMode] set as range.
+    ///
+    /// The argument value will return the changed ranges as
+    /// [List<PickerDateRange] when the widget [SfDateRangeSelectionMode] set as
+    /// multi range.
+    setState(() {
+      if (args.value is DateTime) {
+        _selectedDate = args.value;
+        print(DateFormat('yyyy-MM-dd').format(_selectedDate));
+      } 
+    });
   }
 }
