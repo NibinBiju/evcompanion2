@@ -1,5 +1,6 @@
+import 'package:evcompanion2/presentation/view/login_screen/login_screen.dart';
+import 'package:evcompanion2/presentation/view/settings_page/feedisplay.dart';
 import 'package:evcompanion2/registration_page/reg_details.dart';
-import 'package:evcompanion2/utils/colorConstants.dart';
 import 'package:flutter/material.dart';
 import 'Admin_view_station.dart';
 
@@ -64,10 +65,16 @@ class AdminHome extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => StationDetailsPage()),
+                            builder: (context) => StationsPage()),
                       );
                     }),
-                    _buildContainer("View feedback", () {}),
+                    _buildContainer("View feedback", () {
+                      Navigator.push(context, MaterialPageRoute(
+                       builder: (context)=>DisplayFeedbackPage()));
+                    }),
+                    _buildContainer("Logout", () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginFire()));
+                    }),
                   ],
                 ),
               ),

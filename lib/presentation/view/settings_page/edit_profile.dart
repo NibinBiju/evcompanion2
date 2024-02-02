@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/services.dart';
 import 'package:evcompanion2/presentation/widgets/mytextfield.dart';
 import 'package:evcompanion2/presentation/widgets/customButtom.dart';
@@ -22,7 +21,7 @@ class _EditProfileState extends State<EditProfile> {
   }
 
   void fetchData() async {
-    Preferences = await SharedPreferences.getInstance()!;
+    Preferences = await SharedPreferences.getInstance();
     String? tname = Preferences.getString('namekey')!;
     String? tuname = Preferences.getString('unamekey')!;
     String? tphone = Preferences.getString('phonekey')!;
@@ -37,7 +36,6 @@ class _EditProfileState extends State<EditProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        //backgroundColor: Colors.transparent,
         elevation: 0,
       ),
       body: SingleChildScrollView(
@@ -46,7 +44,6 @@ class _EditProfileState extends State<EditProfile> {
           width: MediaQuery.of(context).size.width,
           child: Column(
             children: [
-              // Image.asset('assets/icon1.png',  height: 100, width: 100, ),
               Text(
                 "My Profile",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
@@ -88,7 +85,7 @@ class _EditProfileState extends State<EditProfile> {
     String? username = uname_ctrl.text;
     String? phone = phone_ctrl.text;
 
-    Preferences = await SharedPreferences.getInstance()!;
+    Preferences = await SharedPreferences.getInstance();
     Preferences.setString('namekey', personname);
     Preferences.setString('unamekey', username);
     Preferences.setString('phonekey', phone);

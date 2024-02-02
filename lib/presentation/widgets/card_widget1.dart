@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../view/login_screen/login_screen.dart';
-import '../view/settings_page/profile.dart';
+
 
 class CardWidget1 extends StatelessWidget {
   final IconData icons;

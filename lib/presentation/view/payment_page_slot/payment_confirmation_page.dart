@@ -12,12 +12,13 @@ class PaymentConfirmationPage extends StatefulWidget {
   const PaymentConfirmationPage({super.key,
    required this.name,
       required this.price,
-      required this.date, required this.time
+      required this.date, required this.time,required this.startingtime,
   });
   final String name;
   final String price;
   final String date;
   final String time;
+  final String startingtime;
 
   @override
   State<PaymentConfirmationPage> createState() => _PaymentConfirmationPageState();
@@ -170,7 +171,7 @@ class _PaymentConfirmationPageState extends State<PaymentConfirmationPage> {
                             ),
                           ),
                           Text(
-                            '10:00 AM',
+                            widget.startingtime,
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 18,
@@ -296,6 +297,7 @@ class _PaymentConfirmationPageState extends State<PaymentConfirmationPage> {
             buttontext: widget.time,
             date: widget.date,
             user: storedusername,
+             startingtime: widget.startingtime,
           ));
                         _showDialog(context);
                       },
@@ -333,7 +335,7 @@ class _PaymentConfirmationPageState extends State<PaymentConfirmationPage> {
       builder: (cnt) {
         return Dialog(
           child: Container(
-            height: 470,
+            height: 500,
             padding: const EdgeInsets.all(15),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
@@ -358,6 +360,29 @@ class _PaymentConfirmationPageState extends State<PaymentConfirmationPage> {
                     fontWeight: FontWeight.w600,
                     fontSize: 23,
                   ),
+                ),
+                Container(
+                  width: 140,
+                          height: 70,
+                          child:  Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // Text(
+                              //   'Username',
+                              //   style: TextStyle(
+                              //     color: Colors.grey,
+                              //     fontWeight: FontWeight.w600,
+                              //   ),
+                              // ),
+                              Text(
+                                storedusername,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
+                          ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -487,28 +512,55 @@ class _PaymentConfirmationPageState extends State<PaymentConfirmationPage> {
                     //     ],
                     //   ),
                     // ),
-                    Container(
-                      width: 140,
-                      height: 70,
-                      child:  Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Total pay',
-                            style: TextStyle(
-                              color: Colors.grey,
-                              fontWeight: FontWeight.w600,
-                            ),
+                    Row(
+                      children: [
+                        Container(
+                          width: 140,
+                          height: 70,
+                          child:  Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Total pay',
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              Text(
+                                widget.price,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
                           ),
-                          Text(
-                            widget.price,
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
+                        ),
+                        Container(
+                          width: 140,
+                          height: 70,
+                          child:  Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Starting Time',
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              Text(
+                                widget.startingtime,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -521,7 +573,7 @@ class _PaymentConfirmationPageState extends State<PaymentConfirmationPage> {
                   },
                   child: Container(
                     width: 150,
-                    height: 70,
+                    height: 50,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(19),
                       color: Colors.green,

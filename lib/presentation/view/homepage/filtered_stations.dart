@@ -65,9 +65,6 @@ class _FilteredStationsPageState extends State<FilteredStationsPage> {
                   image: NetworkImage(filteredStations[index]["image"]),
                 ),
               ),
-              child: Center(child: ElevatedButton(onPressed: (){
-             //   Navigator.push(context, MaterialPageRoute(builder: (context)=>BookingPage()))
-              }, child: Text("View Station"))),
             ),
           ),
         ],

@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 class PaymentSlot extends StatefulWidget {
   const PaymentSlot({super.key, required this.stationName,
    required this.location, 
-  // required this.portName, 
-   required this.price, required this.duration, required this.date,
+  // required this.portName,
+   required this.price, required this.duration, required this.date, required String startTime, required this.startingtime,
   });
   final String stationName;
   final String location;
+  final String startingtime;
   //final String portName;
   final String price;
   final String duration;
   final String date;
-
 
   @override
   State<PaymentSlot> createState() => _PaymentSlotState();
@@ -98,7 +98,9 @@ class _PaymentSlotState extends State<PaymentSlot> {
                       return PaymentConfirmationPage(name: widget.stationName,
                       date: widget.date,
                       price: widget.price,
-                      time: widget.duration,);
+                      time: widget.duration,
+                      startingtime: widget.startingtime,
+                      );
                    },
                  ),
                );

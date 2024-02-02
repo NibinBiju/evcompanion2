@@ -1,25 +1,27 @@
+import 'package:evcompanion2/presentation/view/settings_page/Adminpage/stationstate.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:evcompanion2/controller/favorite_controller/f_controller.dart';
 import 'package:evcompanion2/model/favorite_model.dart';
 import 'package:evcompanion2/presentation/view/details_page/details_page.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../booking_page/booking_page.dart';
-//import '../../settings_page/my_favourite.dart';
 
 class HomepageCard extends StatefulWidget {
   static final List<HomepageCard> favoritesList = [];
   const HomepageCard({
-    super.key,
+    Key? key,
     required this.stationName,
     required this.location,
     required this.portName,
     required this.index,
-    required this.amenities, required this.pricePerHr, required this.image,
+    required this.amenities,
+    required this.pricePerHr,
+    required this.image,
   });
 
   final String stationName;
   final String location;
-final String  pricePerHr;
+  final String pricePerHr;
   final List<Map<String, dynamic>> portName;
   final int index;
   final List<Map<String, dynamic>> amenities;
@@ -36,6 +38,7 @@ class _HomepageCardState extends State<HomepageCard> {
   @override
   Widget build(BuildContext context) {
     var favContro = Provider.of<FavoriteController>(context);
+    var stationState = Provider.of<StationState>(context);
 
     return Card(
       elevation: 10,
@@ -97,8 +100,7 @@ class _HomepageCardState extends State<HomepageCard> {
                               leading: SizedBox(
                                 width: 30,
                                 height: 40,
-                                child:
-                                    Image.asset(widget.portName[index]['image']),
+                                child: Image.asset(widget.portName[index]['image']),
                               ),
                               title: Text(
                                 widget.portName[index]['name'],
@@ -140,26 +142,25 @@ class _HomepageCardState extends State<HomepageCard> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    //view station button
+                    // View station button
                     InkWell(
                       onTap: () {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => DetailsPage(
-                                      stationName: widget.stationName,
-                                      location: widget.location,
-                                      amenities: widget.amenities,
-                                      pricePerHr:widget.pricePerHr,
-                                       portName: 'abc',
-                                        image: widget.image,
-                                       
-                                      
-                                    )));
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailsPage(
+                              stationName: widget.stationName,
+                              location: widget.location,
+                              amenities: widget.amenities,
+                              pricePerHr: widget.pricePerHr,
+                              portName: widget.portName,
+                              image: widget.image,
+                            ),
+                          ),
+                        );
                       },
                       child: Expanded(
                         child: Container(
-                          // width: 140,
                           height: 40,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(13),
@@ -182,68 +183,72 @@ class _HomepageCardState extends State<HomepageCard> {
                       ),
                     ),
 
-                    //book station button
-                    InkWell(
+                    // Book charge button
+                    GestureDetector(
                       onTap: () {
-                        Navigator.push(context,
+                        if (stationState.stationData[widget.index]['stationState'] != 'Not Available') {
+                          Navigator.push(
+                            context,
                             MaterialPageRoute(builder: (context) {
-                          return BookingPage(
-                            location: widget.location,
-                            stationName: widget.stationName,
-                             //portName: widget.portName[widget.index]['name'],
+                              return BookingPage(
+                                location: widget.location,
+                                stationName: widget.stationName,
+                              );
+                            }),
                           );
-                        }));
+                        }
                       },
-                      child: Expanded(
-                        child: Container(
-                          // width: 140,
-                          height: 40,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(13),
-                            color: Colors.green,
-                          ),
-                          child: const Center(
-                            child: Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text(
-                                'Book charge',
-                                style: TextStyle(
-                                  color: Colors.white,
+                        child: Expanded(
+                          child: Container(
+                            height: 40,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(13),
+                              color: Colors.green,
+                            ),
+                            child: const Center(
+                              child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Book charge',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ),
+                   // ),
                   ],
                 )
               ],
             ),
 
-            //button for add to favorite
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 IconButton(
-                    onPressed: () {
-                      if (favContro.favoriteList.any((element) =>
-                          element.stationName == widget.stationName)) {
-                        return;
-                      } else {
-                        favContro.addToFav(FavoriteModel(
-                            stationName: widget.stationName,
-                            location: widget.location));
-                      }
-                    },
-                    icon: Icon(
-                      Icons.favorite,
-                      color: favContro.favoriteList.any(
-                        (element) => element.stationName==widget.stationName)
-                        ?Colors.green:const Color.fromARGB(255, 226, 226, 226)
-                    )),
+                  onPressed: () {
+                    if (favContro.favoriteList.any((element) => element.stationName == widget.stationName)) {
+                      return;
+                    } else {
+                      favContro.addToFav(FavoriteModel(
+                        stationName: widget.stationName,
+                        location: widget.location,
+                      ));
+                    }
+                  },
+                  icon: Icon(
+                    Icons.favorite,
+                    color: favContro.favoriteList.any((element) =>
+                            element.stationName == widget.stationName)
+                        ? Colors.green
+                        : const Color.fromARGB(255, 226, 226, 226),
+                  ),
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),

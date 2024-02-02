@@ -1,4 +1,3 @@
-// ignore_for_file: library_private_types_in_public_api
 import 'package:flutter/material.dart';
 import '../../../utils/colorConstants.dart';
 import '../settings_page/profile.dart';
@@ -38,10 +37,10 @@ class _BottomNavControllerState extends State<BottomNavController> {
             icon: Icon(Icons.home),
             label: "Home",
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.battery_charging_full), label: "Battery"),
+          BottomNavigationBarItem(icon: Icon(Icons.battery_charging_full), label: "Qr code"),
           BottomNavigationBarItem(
             icon: Icon(Icons.earbuds_battery_outlined),
-            label: "Charger",
+            label: "Booking",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

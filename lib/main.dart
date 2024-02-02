@@ -2,13 +2,12 @@
 
 import 'package:evcompanion2/controller/add_vehicle_controller/add_vehicle_provider.dart';
 import 'package:evcompanion2/controller/bookstation_controller.dart';
-
 import 'package:evcompanion2/controller/ev_stations_service/ev_station_services.dart';
 import 'package:evcompanion2/controller/favorite_controller/f_controller.dart';
-import 'package:evcompanion2/presentation/view/homepage/home.dart';
-import 'package:evcompanion2/presentation/view/login_screen/login_screen.dart';
+import 'package:evcompanion2/presentation/view/settings_page/Adminpage/stationstate.dart';
+import 'package:evcompanion2/presentation/view/settings_page/fee.dart';
+import 'package:evcompanion2/registration_page/google_signin/auth_services.dart';
 import 'package:evcompanion2/utils/colorConstants.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:evcompanion2/splash_screen/splash_screen.dart';
@@ -55,7 +54,11 @@ class MyApp extends StatelessWidget {
             ChangeNotifierProvider(create: (context) => AddVehicleProvider()),
             ChangeNotifierProvider(create: (context) => EvStationsServices()),
             ChangeNotifierProvider(create: (context) => FavoriteController()),
-            ChangeNotifierProvider(create: (context) =>StationbookController())
+            ChangeNotifierProvider(create: (context) =>StationbookController()),
+            ChangeNotifierProvider(create: (context) =>FeedbackProvider()),
+            ChangeNotifierProvider(create: (context) => StationState(EvStationsServices().stationData)),
+            ChangeNotifierProvider(create: (context) =>GoogleSignInProvider()),
+
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,

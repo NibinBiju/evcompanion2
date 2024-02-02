@@ -167,11 +167,79 @@ class ViewBookingPage extends StatelessWidget {
         itemCount: provider.bookingList.length,
         itemBuilder: (context, index) {
           MyBookingModel booking = provider.bookingList[index];
-          return ListTile(
-            leading: Image.asset(booking.image),
-            title: Text(booking.name),
-            subtitle: Text('${booking.date} - ${booking.buttontext}'),
-            trailing: Text(booking.price),
+          return
+          Container(
+             padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12.0),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.shade300,
+            blurRadius: 8.0,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image.asset(
+                  booking.image,
+                  width: 80,
+                  height: 80,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              const SizedBox(height: 12.0,width: 20,),
+              Text(
+                booking.user,
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8.0),
+          Text(
+            booking.name,
+            style: TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+          const SizedBox(height: 8.0),
+          Text(
+            ('${booking.date} - ${booking.buttontext}'),
+            style: TextStyle(
+              fontSize: 14.0,
+              color: Colors.grey,
+            ),
+          ),
+          Text(
+            booking.startingtime,
+            style: TextStyle(
+              fontSize: 14.0,
+              color: Colors.grey,
+            ),
+          ),
+          const SizedBox(height: 8.0),
+          Text(
+            booking.price,
+            style: TextStyle(
+              fontSize: 16.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.green,
+            ),
+          ),
+        ],
+      ),
           );
         },
       ),

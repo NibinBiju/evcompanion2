@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:evcompanion2/view_booking/view_booking.dart';
+import 'package:evcompanion2/presentation/view/settings_page/Adminpage/admin_viewbooking.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -30,7 +30,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 userContainers.add(
                   InkWell(
                     onTap: (){
-                     // Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewBookingPage(user: userData['email'],)));
+                     Navigator.push(context, MaterialPageRoute(builder: (context)=>AdminViewBook(user: userData['email'].toString(),)));
                     },
                     child: Container(
                       decoration: BoxDecoration(

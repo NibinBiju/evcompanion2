@@ -1,4 +1,3 @@
-// import 'package:evcompanion2/presentation/payment/roadMap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 
@@ -27,9 +26,9 @@ class _PaymentDetailsState extends State<PaymentDetails> {
             expiryDate: expiryDateTextController.text,
             cardHolderName: cardHolderNameTextController.text,
             cvvCode: cvvCodeTextController.text,
-            showBackView: false, //true when you want to show cvv(back) view
+            showBackView: false,
             onCreditCardWidgetChange: (CreditCardBrand
-                brand) {}, // Callback for anytime credit card brand is changed
+                brand) {},
           ),
           const SizedBox(
             height: 20,
