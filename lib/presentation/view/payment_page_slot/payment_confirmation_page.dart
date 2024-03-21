@@ -367,18 +367,14 @@ class _PaymentConfirmationPageState extends State<PaymentConfirmationPage> {
                           child:  Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              // Text(
-                              //   'Username',
-                              //   style: TextStyle(
-                              //     color: Colors.grey,
-                              //     fontWeight: FontWeight.w600,
-                              //   ),
-                              // ),
-                              Text(
-                                storedusername,
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  storedusername,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
                               ),
                             ],

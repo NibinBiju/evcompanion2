@@ -78,6 +78,7 @@ class _BookingPageState extends State<BookingPage> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: SfDateRangePicker(
+                    minDate: DateTime.now(),
                     onSelectionChanged: _onSelectionChanged,
                     selectionTextStyle: const TextStyle(
                       fontSize: 18,

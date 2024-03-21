@@ -28,19 +28,7 @@ void main() async{
     const MyApp(),
   );
 }
-// void main() async {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   await Firebase.initializeApp(
-//     options: const FirebaseOptions(
-//       apiKey: "AIzaSyA7RetFWM0eNNwpE4ZZVqJGOv34wkH-FQE",
-//       projectId: "flutter-firebase1-cc212",
-//       appId: '1:29599385366:android:6b98491c7c42116f75b237',
-//       messagingSenderId: '',
-//     ),);
-//   // to get the currently logined in user
-//   User? user = FirebaseAuth.instance.currentUser;
-//   runApp(MaterialApp(home: user == null ? LoginFire() : Homepage()));
-// }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
